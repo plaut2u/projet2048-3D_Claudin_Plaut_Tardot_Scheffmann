@@ -50,7 +50,16 @@ public class Plateau implements Parametres{
     }
     
     // Méthodes
+    // Méthodes
+    private boolean défaite(){
+        boolean bool=false;
+        if(!plateau[0].getDep() && !plateau[1].getDep() && !plateau[2].getDep()){
+            bool = true;
+            
+        }
+        return bool;
     
     
 // FIN
+}
 }

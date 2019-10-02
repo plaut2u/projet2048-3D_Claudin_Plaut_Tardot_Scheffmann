@@ -25,6 +25,9 @@ public class Grid implements Parametres {
     public HashSet<Case> getGrid() {
         return this.grille;
     }
+    public boolean getDep(){
+        return this.deplacement;
+    }
 
     public int getValeurMax() {
         return this.valeurMax;
