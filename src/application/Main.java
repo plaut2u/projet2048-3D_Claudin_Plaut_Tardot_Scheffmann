@@ -23,37 +23,38 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("menuConnexionScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
         
         Scene scene = new Scene(root);
+        boolean add = scene.getStylesheets().add("css/styles.css");
         
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent e) {
-                if (null != e.getCode()) switch (e.getCode()) {
-                    case D:
-                        System.out.println("Mouvement à droite");
-                        break;
-                    case Q:
-                        System.out.println("Mouvement à gauche");
-                        break;
-                    case Z:
-                        System.out.println("Mouvement en haut");
-                        break;
-                    case S:
-                        System.out.println("Mouvement en bas");
-                        break;
-                    case A:
-                        System.out.println("Mouvement au dessus");
-                        break;
-                    case E:
-                        System.out.println("Mouvement en dessous");
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent e) {
+//                if (null != e.getCode()) switch (e.getCode()) {
+//                    case D:
+//                        System.out.println("Mouvement à droite");
+//                        break;
+//                    case Q:
+//                        System.out.println("Mouvement à gauche");
+//                        break;
+//                    case Z:
+//                        System.out.println("Mouvement en haut");
+//                        break;
+//                    case S:
+//                        System.out.println("Mouvement en bas");
+//                        break;
+//                    case A:
+//                        System.out.println("Mouvement au dessus");
+//                        break;
+//                    case E:
+//                        System.out.println("Mouvement en dessous");
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        });
 
         stage.setScene(scene);
         stage.show();
