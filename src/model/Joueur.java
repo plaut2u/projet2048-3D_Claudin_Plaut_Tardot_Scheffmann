@@ -6,10 +6,9 @@ package model;
  * and open the template in the editor.
  */
 
-/**
- *
+/*
  * @author scheffma4u
- */
+*/
 public class Joueur {
     private String id, motDePasse;
     private int meilleurScore;

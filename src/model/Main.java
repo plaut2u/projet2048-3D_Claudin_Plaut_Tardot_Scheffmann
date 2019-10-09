@@ -2,17 +2,24 @@ package model;
 
 import java.util.Scanner;
 
-/**
+/*
  * @author William
  */
 public class Main implements Parametres {
     public static void main(String[] args) {
         
-        Grid g = new Grid();
-        boolean b = g.nouvelleCase();
-        b = g.nouvelleCase();
-        System.out.println(g);
+        // Initialisation
+        Plateau p = new Plateau();
+        System.out.println("========================================\n");
+        System.out.println("Nouvelle partie :");
+        System.out.println(p);
+        //
+        boolean b = p.nouvelleCasePlateau();
+        System.out.println("========================================\n");
+        System.out.println(p);
+        //
         Scanner sc = new Scanner(System.in);
+        
         /*System.out.println("X:");
         int x= sc.nextInt();
         System.out.println("Y:");
@@ -23,7 +30,8 @@ public class Main implements Parametres {
         g.getGrid().remove(c);
         System.out.println(g);*/
         
-        while (!g.checkMoves()) {
+        while (p.checkMovesPlateau() == true) {
+            System.out.println("========================================\n");
             System.out.println("Déplacer vers la Droite (d), Gauche (g), Haut (h), ou Bas (b) ?");
             String s = sc.nextLine();
             s.toLowerCase();
@@ -43,16 +51,18 @@ public class Main implements Parametres {
                 } else {
                     direction = BAS;
                 }
-                boolean b2 = g.lanceurDeplacerCases(direction);
-                if (b2) {
-                    b = g.nouvelleCase();
-                    if (!b) g.gameOver();
+                //boolean b2 = g.lanceurDeplacerCases(direction);
+                boolean b2 = p.lanceurDeplacerCasePlateau(direction);
+                if (b2 == true) {
+                    //b = g.nouvelleCase();
+                    b = p.nouvelleCasePlateau();
+                    if (b == false) p.gameOver();
                 }
-                System.out.println(g);
-                if (g.getValeurMax()>=OBJECTIF) g.victory();
+                System.out.println(p);
+                if (p.calculScore()>=OBJECTIF) p.victory();
             }
         }
-        g.gameOver();
+        p.gameOver();
         /*
         // Bout de code pour tester manuellement si une grille contient une case ou pas
         Scanner sc = new Scanner(System.in);

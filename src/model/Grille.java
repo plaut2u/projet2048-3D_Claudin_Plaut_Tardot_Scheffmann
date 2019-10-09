@@ -6,10 +6,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
-/**
+/*
  * @author William
  */
-public class Grid implements Parametres {
+
+public class Grille implements Parametres {
 
     // Variables
     private HashSet<Case> grille;
@@ -17,12 +18,12 @@ public class Grid implements Parametres {
     private boolean deplacement;
 
     // Constructeur
-    public Grid() {
+    public Grille() {
         this.grille = new HashSet<>();
     }
 
     // Getter
-    public HashSet<Case> getGrid() {
+    public HashSet<Case> getGrille() {
         return this.grille;
     }
     public boolean getDep(){
@@ -34,7 +35,7 @@ public class Grid implements Parametres {
     }
 
     // Setter
-    public void setGrid(HashSet<Case> g) {
+    public void setGrille(HashSet<Case> g) {
         this.grille = g;
     }
 
@@ -55,18 +56,6 @@ public class Grid implements Parametres {
             result += Arrays.toString(tableau[i]) + "\n";
         }
         return result;
-    }
-
-    // Message de victoire
-    public void victory() {
-        System.out.println("Victoire ! Vous avez atteint " + this.valeurMax);
-        System.exit(0);
-    }
-
-    // Message de défaite
-    public void gameOver() {
-        System.out.println("Perdu ! La partie est finie. Votre score est " + this.valeurMax);
-        System.exit(1);
     }
 
     // Création d'une nouvelle case, à condition qu'il reste au moins un emplacement vide dans la grille
@@ -100,19 +89,19 @@ public class Grid implements Parametres {
     // Retourne VRAI si des mouvements sont encore possibles sur la grille, retourne FAUX sinon
     public boolean checkMoves() {
         if (this.grille.size() < TAILLE * TAILLE) {
-            return false;
+            return true;
         } else {
             for (Case c : this.grille) {
                 for (int i = 1; i <= 2; i++) {
                     if (c.getVoisinDirect(i) != null) {
                         if (c.valeurEgale(c.getVoisinDirect(i))) {
-                            return false;
+                            return true;
                         }
                     }
                 }
             }
         }
-        return true;
+        return false;
     }
 
     // DEPLACEMENTS DES CASES :

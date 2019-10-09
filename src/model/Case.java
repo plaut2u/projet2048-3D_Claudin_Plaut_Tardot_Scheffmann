@@ -1,13 +1,13 @@
 package model;
 
-/**
+/*
  * @author William
  */
 public class Case implements Parametres {
 
     // Variables
     private int x, y, valeur; // x = abscisse ; y = ordonnée
-    private Grid grille;
+    private Grille grille;
 
     // Constructeur
     public Case(int abs, int ord, int v) {
@@ -29,7 +29,7 @@ public class Case implements Parametres {
         return this.valeur;
     }
 
-    public Grid getGrid() {
+    public Grille getGrid() {
         return this.grille;
     }
 
@@ -46,7 +46,7 @@ public class Case implements Parametres {
         this.valeur = v;
     }
 
-    public void setGrid(Grid g) {
+    public void setGrid(Grille g) {
         this.grille = g;
     }
 
@@ -93,7 +93,7 @@ public class Case implements Parametres {
     public Case getVoisinDirect(int direction) {
         if (direction == HAUT) {
             for (int i = this.y - 1; i >= 0; i--) {
-                for (Case c : grille.getGrid()) {
+                for (Case c : grille.getGrille()) {
                     if (c.getX() == this.x && c.getY() == i) {
                         return c;
                     }
@@ -101,7 +101,7 @@ public class Case implements Parametres {
             }
         } else if (direction == BAS) {
             for (int i = this.y + 1; i < TAILLE; i++) {
-                for (Case c : grille.getGrid()) {
+                for (Case c : grille.getGrille()) {
                     if (c.getX() == this.x && c.getY() == i) {
                         return c;
                     }
@@ -109,7 +109,7 @@ public class Case implements Parametres {
             }
         } else if (direction == GAUCHE) {
             for (int i = this.x - 1; i >= 0; i--) {
-                for (Case c : grille.getGrid()) {
+                for (Case c : grille.getGrille()) {
                     if (c.getX() == i && c.getY() == this.y) {
                         return c;
                     }
@@ -117,7 +117,7 @@ public class Case implements Parametres {
             }
         } else if (direction == DROITE) {
             for (int i = this.x + 1; i < TAILLE; i++) {
-                for (Case c : grille.getGrid()) {
+                for (Case c : grille.getGrille()) {
                     if (c.getX() == i && c.getY() == this.y) {
                         return c;
                     }
