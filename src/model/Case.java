@@ -3,7 +3,7 @@ package model;
 /*
  * @author William
  */
-public class Case implements Parametres {
+public class Case implements Parametres, java.io.Serializable {
 
     // Variables
     private int x, y, valeur; // x = abscisse ; y = ordonnée

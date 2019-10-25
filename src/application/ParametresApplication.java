@@ -22,4 +22,11 @@ public interface ParametresApplication {
 
     // Objectif :
     static final int OBJECTIF = 2048;
+    
+    //Graphique
+    static final int HAUTEURTUILE = 97;
+    static final int LARGEURTUILE = 107;
+    static final int DEBUTGRILLEX = 68;
+    static final int DEBUTGRILLEY = 201;
+    static final int ESPACE = 40;
 }

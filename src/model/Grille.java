@@ -5,11 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
-import static model.Parametres.BAS;
-import static model.Parametres.DROITE;
-import static model.Parametres.GAUCHE;
-import static model.Parametres.HAUT;
-import static model.Parametres.TAILLE;
 
 /*
  * @author William

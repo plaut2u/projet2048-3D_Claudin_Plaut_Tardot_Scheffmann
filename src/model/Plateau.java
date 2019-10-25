@@ -6,7 +6,7 @@ import static model.Parametres.TAILLE;
 /*
  * @author William
  */
-public class Plateau implements Parametres {
+public class Plateau implements Parametres, java.io.Serializable {
 
     // Variables
     private Grille[] plateau;
@@ -128,6 +128,12 @@ public class Plateau implements Parametres {
         }
         return b;
     }
-
+    
+    //methode pour savoir si une case est présente sur le plateau de 3 grilles
+    public boolean contains(Case elem) {
+        return true;
+    }
 // FIN
+
+    
 }

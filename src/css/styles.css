@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .pane {
-    -fx-background-color: #99FF33;
+    -fx-background-color: orange;
     -fx-border-color: black;
 }
 
