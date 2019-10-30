@@ -24,7 +24,7 @@ and open the template in the editor.
 .tuile {
     /*-fx-text-alignment: center;
     -fx-halignment: center; */
-    -fx-text-fill: #6666FF;
+    -fx-text-fill: white;
     /*-fx-font: "Cambria";*/
     -fx-font-size: 32;
     -fx-padding: 25 44 24 44;

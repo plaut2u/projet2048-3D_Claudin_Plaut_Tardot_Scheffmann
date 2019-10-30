@@ -1,5 +1,8 @@
 package application;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
+
 /*
  * @author William
  */

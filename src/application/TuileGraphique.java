@@ -5,24 +5,26 @@
  */
 package application;
 
+import java.util.ArrayList;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.Case;
 
+
 /**
  *
  * @author plaut2u
  */
-public class TuileGraphique extends Case {
+public class TuileGraphique extends Case implements ParametresApplication{
 
     private int objectifx, objectify, posx, posy;
     public Thread thread;
-    private Pane p;
+    private Pane p, fond;
     private final Label c;
 
-    public TuileGraphique(int abs, int ord, int v, Pane fond) {
+    public TuileGraphique(int abs, int ord, int v, Pane fd) {
         super(abs, ord, v);
         this.objectifx = abs;
         this.objectify = ord;
@@ -30,11 +32,17 @@ public class TuileGraphique extends Case {
         this.posy = ord;
         this.c = new Label(String.valueOf(v));
         this.p = new Pane();
+        this.fond = fd;
 
         this.p.getStyleClass().add("pane");
         this.c.getStyleClass().add("tuile");
         GridPane.setHalignment(this.c, HPos.CENTER);
-        fond.getChildren().add(this.p);
+        
+        //PROBLEME : quand on créer une case apres le debut du jeu
+                //this.fond.getChildren().add(this.p); //impossible de passer cette ligne
+                //System.out.println("Created fontchildren");
+        //FIN PROBLEME
+        
         this.p.getChildren().add(this.c);
 
         this.p.setLayoutX(super.getX());
@@ -66,6 +74,10 @@ public class TuileGraphique extends Case {
 
     public int getPosy() {
         return this.posy;
+    }
+    
+    public Pane getFond(){
+        return this.fond;
     }
 
     //SETTERS
