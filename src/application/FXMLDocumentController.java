@@ -10,6 +10,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -37,9 +40,11 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
     private Pane fond;
     @FXML
     private Label moves;
+    @FXML
+    private Label score;
 
     // variables globales non définies dans la vue (fichier .fxml)
-    private final ArrayList<TuileGraphique> list = new ArrayList<>();
+    private ArrayList<TuileGraphique> list = new ArrayList<>();
     Plateau p = new Plateau();
     boolean b = p.nouvelleCasePlateau();
     int direction;
@@ -123,14 +128,14 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            // TODO
+            System.out.println(p);
+            update(1);
 
-        for (int i = 0; i < NBGRILLES; i++) {
-            for (Case elem : p.getPlateau()[i].getGrille()) {
-                list.add(new TuileGraphique((int)(LARGEURTUILE * NBGRILLES * i + elem.getX()) + DEBUTGRILLEX + (int)(ESPACE * i), (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY, elem.getValeur(), fond));
-            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(p);
     }
 
     /*
@@ -145,7 +150,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         if (touche.compareTo("q") == 0) {
             direction = GAUCHE;
             for (int i = 0; i < list.size(); i++) {
-                if ((list.get(i).getObjectifx() >= DEBUTGRILLEX+LARGEURTUILE && list.get(i).getObjectifx() <= LARGEURTUILE * 2 + DEBUTGRILLEX) || (list.get(i).getObjectifx() > (LARGEURTUILE * TAILLE) + DEBUTGRILLEX + ESPACE && list.get(i).getObjectifx() < (TAILLE*2*LARGEURTUILE)+ESPACE+DEBUTGRILLEX) || (list.get(i).getObjectifx() >= TAILLE*2*LARGEURTUILE+ESPACE*2+DEBUTGRILLEX+LARGEURTUILE && list.get(i).getObjectifx() < TAILLE*3*LARGEURTUILE+ESPACE*2+DEBUTGRILLEX)) {
+                if ((list.get(i).getObjectifx() >= LARGEURTUILE + DEBUTGRILLEX && list.get(i).getObjectifx() < TAILLE * LARGEURTUILE + DEBUTGRILLEX) || (list.get(i).getObjectifx() > (LARGEURTUILE * TAILLE) + DEBUTGRILLEX + ESPACE && list.get(i).getObjectifx() <= (TAILLE * 2 * LARGEURTUILE) + ESPACE + DEBUTGRILLEX) || (list.get(i).getObjectifx() >= TAILLE * 2 * LARGEURTUILE + ESPACE * 2 + DEBUTGRILLEX + LARGEURTUILE && list.get(i).getObjectifx() <= TAILLE * 3 * LARGEURTUILE + ESPACE * 2 + DEBUTGRILLEX)) {
                     list.get(i).setObjectifx(list.get(i).getObjectifx() - LARGEURTUILE);
                     check = true;
                 }
@@ -169,7 +174,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         } else if (touche.compareTo("d") == 0) {
             direction = DROITE;
             for (int i = 0; i < list.size(); i++) {
-                if ((list.get(i).getObjectifx() < DEBUTGRILLEX+LARGEURTUILE*2 && list.get(i).getObjectifx() >= DEBUTGRILLEX) || (list.get(i).getObjectifx() < DEBUTGRILLEX+LARGEURTUILE*(2+TAILLE)+ESPACE && list.get(i).getObjectifx() >= TAILLE*LARGEURTUILE+DEBUTGRILLEX+ESPACE) || (list.get(i).getObjectifx() < (TAILLE*2+2)*LARGEURTUILE+2*ESPACE+DEBUTGRILLEX && list.get(i).getObjectifx() >= (TAILLE*2)*LARGEURTUILE+2*ESPACE+DEBUTGRILLEX)) { // possible uniquement si on est pas dans la colonne la plus à droite (taille de la fenêtre - 2*taille d'une case - taille entre la grille et le bord de la fenêtre)
+                if ((list.get(i).getObjectifx() < DEBUTGRILLEX + LARGEURTUILE * 2 && list.get(i).getObjectifx() >= DEBUTGRILLEX) || (list.get(i).getObjectifx() < DEBUTGRILLEX + LARGEURTUILE * (2 + TAILLE) + ESPACE && list.get(i).getObjectifx() >= TAILLE * LARGEURTUILE + DEBUTGRILLEX + ESPACE) || (list.get(i).getObjectifx() < (TAILLE * 2 + 2) * LARGEURTUILE + 2 * ESPACE + DEBUTGRILLEX && list.get(i).getObjectifx() >= (TAILLE * 2) * LARGEURTUILE + 2 * ESPACE + DEBUTGRILLEX)) { // possible uniquement si on est pas dans la colonne la plus à droite (taille de la fenêtre - 2*taille d'une case - taille entre la grille et le bord de la fenêtre)
                     list.get(i).setObjectifx(list.get(i).getObjectifx() + LARGEURTUILE);
                     check = true;
                 }
@@ -215,7 +220,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         } else if (touche.compareTo("s") == 0) {
             direction = BAS;
             for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getObjectify() < DEBUTGRILLEY+2*HAUTEURTUILE) {
+                if (list.get(i).getObjectify() < DEBUTGRILLEY + 2 * HAUTEURTUILE) {
                     list.get(i).setObjectify(list.get(i).getObjectify() + HAUTEURTUILE);
                     check = true;
                 }
@@ -238,8 +243,8 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         } else if (touche.compareTo("e") == 0) {
             direction = DOWN;
             for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getObjectifx() >= DEBUTGRILLEX && list.get(i).getObjectifx() <= 2*TAILLE*LARGEURTUILE+DEBUTGRILLEX+ESPACE) {
-                    list.get(i).setObjectifx(list.get(i).getObjectifx() + (TAILLE*LARGEURTUILE+ESPACE));
+                if (list.get(i).getObjectifx() >= DEBUTGRILLEX && list.get(i).getObjectifx() <= 2 * TAILLE * LARGEURTUILE + DEBUTGRILLEX + ESPACE) {
+                    list.get(i).setObjectifx(list.get(i).getObjectifx() + (TAILLE * LARGEURTUILE + ESPACE));
                     check = true;
                 }
             }
@@ -261,8 +266,8 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         } else if (touche.compareTo("a") == 0) {
             direction = UP;
             for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getObjectifx() >= DEBUTGRILLEX+ESPACE+TAILLE*LARGEURTUILE && list.get(i).getObjectifx() <= TAILLE*NBGRILLES*LARGEURTUILE+2*ESPACE+DEBUTGRILLEX) {
-                    list.get(i).setObjectifx(list.get(i).getObjectifx() - (TAILLE*LARGEURTUILE+ESPACE));
+                if (list.get(i).getObjectifx() >= DEBUTGRILLEX + ESPACE + TAILLE * LARGEURTUILE && list.get(i).getObjectifx() <= TAILLE * NBGRILLES * LARGEURTUILE + 2 * ESPACE + DEBUTGRILLEX) {
+                    list.get(i).setObjectifx(list.get(i).getObjectifx() - (TAILLE * LARGEURTUILE + ESPACE));
                     check = true;
                 }
             }
@@ -327,6 +332,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                         Thread.sleep(1);
                     }
                 }
+                update(2);
                 return null; // la méthode call doit obligatoirement retourner un objet. Ici on n'a rien de particulier à retourner. Du coup, on utilise le type Void (avec un V majuscule) : c'est un type spécial en Java auquel on ne peut assigner que la valeur null
                 // end call
             }
@@ -335,36 +341,52 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         th.setDaemon(true); // le Thread s'exécutera en arrière-plan (démon informatique)
         th.start(); // et on exécute le Thread pour mettre à jour la vue (déplacement continu de la tuile horizontalement)
 
-//        for (int i = 0; i < NBGRILLES; i++) {
-//            for (Case elem : p.getPlateau()[i].getGrille()) {
-//                for (int j = 0; j < list.size(); j++) {
-//                    if (list.get(j).getX() >= ((LARGEURTUILLE * NBGRILLES * i + elem.getX()) + DEBUTGRILLEX + ESPACE * i) - 10 && list.get(j).getX() <= ((LARGEURTUILLE * NBGRILLES * i + elem.getX()) + DEBUTGRILLEX + ESPACE * i) + 10) {
-//                        if (list.get(j).getY() >= (HAUTEURTUILLE * elem.getY() + DEBUTGRILLEY) - 10 && list.get(j).getY() <= (HAUTEURTUILLE * elem.getY() + DEBUTGRILLEY) + 10) {
+    }
+
+    public void update(int n) throws InterruptedException {
+       
+        if (n == 1) { //LA PREMIERE FOIS QU'ON LANCE LE JEU
+            for (int i = 0; i < NBGRILLES; i++) {
+                for (Case elem : p.getPlateau()[i].getGrille()) {
+                    int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
+                    int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
+                    list.add(new TuileGraphique(newx, newy, elem.getValeur(), fond));
+                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
+                    list.get(i).getPane().setVisible(true);
+                    fond.getChildren().add(list.get(i).getPane());
+                }
+            }
+        } else { //LES AUTRES FOIS
+            //SUPRESSION DES ELEMENTS DE LA LISTE
+//            for (int i = 0; i < NBGRILLES; i++) {
+//                for (Case elem : p.getPlateau()[i].getGrille()) {
+//                    for (int j = 0; j < list.size(); j++) {
+//                        int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
+//                        int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
+//                        if (list.get(j).getX() == newx && list.get(j).getY() == newy) {
 //                            list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
-//                            list.get(j).getPane().setVisible(false);
-//                            list.remove(j);
 //                        }
+//                        list.get(j).getPane().setVisible(false);
+//                        list.remove(j);
 //                    }
-//                    
 //                }
 //            }
-//        }
-//        System.out.println(list);
-//        Thread.sleep(5);
-
-        //MISE A JOUR DU GRAPHIQUE EN FONCTION DE LA GRILLE
-//        int compt = 0;
-//        for (int i = 0; i < NBGRILLES; i++) {
-//            
-//            for (Case elem : p.getPlateau()[i].getGrille()) {
-//                list.add(new TuileGraphique((LARGEURTUILLE * NBGRILLES * i + elem.getX()) + DEBUTGRILLEX + ESPACE * i, HAUTEURTUILLE * elem.getY() + DEBUTGRILLEY, elem.getValeur(), fond));
-//                list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
-//                list.get(i).getPane().setVisible(true);
-//                compt ++;
-//            }
-//            
-//        }
-//        System.out.println("nombre de case rajoutés : " + compt);
-//        System.out.println(list);
+            //MISE A JOUR DU GRAPHIQUE EN FONCTION DE LA GRILLE
+            for (int i = 0; i < NBGRILLES; i++) {
+                for (Case elem : p.getPlateau()[i].getGrille()) {
+                    int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
+                    int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
+                    list.add(new TuileGraphique(newx, newy, elem.getValeur(), fond));
+                }
+            }
+            System.out.println(list.size());
+            for (int j = 0; j < list.size(); j++) {
+                list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
+                list.get(j).getPane().setVisible(true);
+                fond.getChildren().add(list.get(j).getPane());
+                System.out.println("Airforce 44444444");
+            }
+            System.out.println(list);
+        }
     }
 }
