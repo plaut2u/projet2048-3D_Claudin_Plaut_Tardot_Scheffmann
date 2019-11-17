@@ -35,10 +35,7 @@ public class Main extends Application {
         
         
         mainContainer.loadScreen(Main.screenLoginID, Main.screenLoginFile);
-//        mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
-//        mainContainer.loadScreen(Main.screenGameID, Main.screenGameFile);
-//        mainContainer.loadScreen(Main.screenVictoryID, Main.screenVictoryFile);
-//        mainContainer.loadScreen(Main.screenGameOverID, Main.screenGameOverFile);
+
         
         mainContainer.setScreen(Main.screenLoginID);
         
