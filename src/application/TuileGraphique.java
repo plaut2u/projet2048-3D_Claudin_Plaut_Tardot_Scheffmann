@@ -5,9 +5,10 @@
  */
 package application;
 
-import java.util.ArrayList;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.Case;
@@ -20,9 +21,9 @@ import model.Case;
 public class TuileGraphique extends Case implements ParametresApplication{
 
     private int objectifx, objectify, posx, posy;
-    public Thread thread;
     private Pane p, fond;
     private final Label c;
+    private final ImageView img;
 
     public TuileGraphique(int abs, int ord, int v, Pane fd) {
         super(abs, ord, v);
@@ -33,17 +34,23 @@ public class TuileGraphique extends Case implements ParametresApplication{
         this.c = new Label(String.valueOf(v));
         this.p = new Pane();
         this.fond = fd;
-
-        this.p.getStyleClass().add("pane");
-        this.c.getStyleClass().add("tuile");
-        GridPane.setHalignment(this.c, HPos.CENTER);
         
-        this.p.getChildren().add(this.c);
-
-        this.p.setLayoutX(super.getX());
-        this.p.setLayoutY(super.getY());
-        this.p.setVisible(true);
-        this.c.setVisible(true);
+        
+        Image image = new Image("img/" + "tile" + String.valueOf(v) + ".jpg");
+        this.img = new ImageView();
+        this.img.setImage(image);
+        
+        
+//        this.p.getStyleClass().add("pane");
+//        this.c.getStyleClass().add("tuile");
+//        GridPane.setHalignment(this.c, HPos.CENTER);
+        GridPane.setHalignment(this.img, HPos.CENTER);
+//      
+//        this.p.getChildren().add(this.c);   
+//        this.p.setLayoutX(super.getX());
+//        this.p.setLayoutY(super.getY());
+//        this.p.setVisible(true);
+//        this.c.setVisible(true);
     }
 
     //GETTERS
@@ -73,6 +80,10 @@ public class TuileGraphique extends Case implements ParametresApplication{
     
     public Pane getFond(){
         return this.fond;
+    }
+    
+    public ImageView getImg(){
+        return this.img;
     }
 
     //SETTERS

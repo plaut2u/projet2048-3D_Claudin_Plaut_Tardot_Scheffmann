@@ -14,15 +14,11 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import model.Case;
 import model.Plateau;
 
@@ -63,9 +59,11 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
                     int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
                     if (list.get(j).getX() == newx && list.get(j).getY() == newy) {
-                        list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
+//                        list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
+                        list.get(j).getImg().relocate(list.get(j).getPosx(), list.get(j).getPosy());
                     }
-                    list.get(j).getPane().setVisible(false);
+//                    list.get(j).getPane().setVisible(false);
+                    list.get(j).getImg().setVisible(false);
                     list.remove(j);
                 }
             }
@@ -83,9 +81,13 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                 int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
                 int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
                 list.add(new TuileGraphique(newx, newy, elem.getValeur(), fond));
-                list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
-                list.get(i).getPane().setVisible(true);
-                fond.getChildren().add(list.get(i).getPane());
+//                list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
+//                list.get(i).getPane().setVisible(true);
+//                fond.getChildren().add(list.get(i).getPane());
+                
+                list.get(i).getImg().relocate(list.get(i).getPosx(), list.get(i).getPosy());
+                list.get(i).getImg().setVisible(true);
+                fond.getChildren().add(list.get(i).getImg());
             }
         }
     }
@@ -289,8 +291,11 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                             public void run() {
                                 //javaFX operations should go here
                                 for (int i = 0; i < list.size(); i++) {
-                                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
-                                    list.get(i).getPane().setVisible(true);
+//                                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
+//                                    list.get(i).getPane().setVisible(true);
+                                    
+                                    list.get(i).getImg().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
+                                    list.get(i).getImg().setVisible(true);
                                 }
                             }
                         });
@@ -308,8 +313,11 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                             public void run() {
                                 //javaFX operations should go here
                                 for (int i = 0; i < list.size(); i++) {
-                                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
-                                    list.get(i).getPane().setVisible(true);
+//                                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
+//                                    list.get(i).getPane().setVisible(true);
+                                    
+                                    list.get(i).getImg().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
+                                    list.get(i).getImg().setVisible(true);
                                 }
                             }
                         }
@@ -365,9 +373,15 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
                     int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
                     list.add(new TuileGraphique(newx, newy, elem.getValeur(), fond));
-                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
-                    list.get(i).getPane().setVisible(true);
-                    fond.getChildren().add(list.get(i).getPane());
+
+//                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
+//                    list.get(i).getPane().setVisible(true);
+//                    fond.getChildren().add(list.get(i).getPane());
+                    
+                    list.get(i).getImg().relocate(list.get(i).getPosx(), list.get(i).getPosy());
+                    list.get(i).getImg().setVisible(true);
+                    fond.getChildren().add(list.get(i).getImg());
+                    
                 }
             }
         } else { //LES AUTRES FOIS
@@ -378,9 +392,11 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                         int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
                         int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
                         if (list.get(j).getX() == newx && list.get(j).getY() == newy) {
-                            list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
+//                            list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
+                            list.get(j).getImg().relocate(list.get(j).getPosx(), list.get(j).getPosy());
                         }
-                        list.get(j).getPane().setVisible(false);
+//                        list.get(j).getPane().setVisible(false);
+                        list.get(j).getImg().setVisible(false);
                         list.remove(j);
                     }
                 }
@@ -394,9 +410,13 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                 }
             }
             for (int j = 0; j < list.size(); j++) {
-                list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
-                list.get(j).getPane().setVisible(true);
-                fond.getChildren().add(list.get(j).getPane());
+//                list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
+//                list.get(j).getPane().setVisible(true);
+//                fond.getChildren().add(list.get(j).getPane());
+                
+                list.get(j).getImg().relocate(list.get(j).getPosx(), list.get(j).getPosy());
+                list.get(j).getImg().setVisible(true);
+                fond.getChildren().add(list.get(j).getImg());
             }
 
             //Mise a jour du score :
