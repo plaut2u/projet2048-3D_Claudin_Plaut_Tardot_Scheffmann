@@ -38,11 +38,6 @@ public class TuileGraphique extends Case implements ParametresApplication{
         this.c.getStyleClass().add("tuile");
         GridPane.setHalignment(this.c, HPos.CENTER);
         
-        //PROBLEME : quand on créer une case apres le debut du jeu
-                //this.fond.getChildren().add(this.p); //impossible de passer cette ligne
-                //System.out.println("Created fontchildren");
-        //FIN PROBLEME
-        
         this.p.getChildren().add(this.c);
 
         this.p.setLayoutX(super.getX());

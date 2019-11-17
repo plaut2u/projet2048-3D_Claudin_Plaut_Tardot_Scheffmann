@@ -6,11 +6,10 @@
 package application;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -19,45 +18,42 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     
+    public static String screenLoginID = "login";
+    public static String screenLoginFile = "menuConnexionScene.fxml";
+    public static String screenMenuID = "menu";
+    public static String screenMenuFile = "choixModeScene.fxml";
+    public static String screenGameID = "game";
+    public static String screenGameFile = "gameScene.fxml";
+    public static String screenVictoryID = "victory";
+    public static String screenVictoryFile = "VictoryScene.fxml";
+    public static String screenGameOverID = "gameover";
+    public static String screenGameOverFile = "GameOverScene.fxml";
+    public static ScreensController mainContainer = new ScreensController();
     
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
         
+        mainContainer.loadScreen(Main.screenLoginID, Main.screenLoginFile);
+//        mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
+//        mainContainer.loadScreen(Main.screenGameID, Main.screenGameFile);
+//        mainContainer.loadScreen(Main.screenVictoryID, Main.screenVictoryFile);
+//        mainContainer.loadScreen(Main.screenGameOverID, Main.screenGameOverFile);
+        
+        mainContainer.setScreen(Main.screenLoginID);
+        
+        Group root = new Group();
+        root.getChildren().addAll(mainContainer);
         Scene scene = new Scene(root);
         boolean add = scene.getStylesheets().add("css/styles.css");
+        primaryStage.setScene(scene);
+//        primaryStage.sizeToScene();
+        primaryStage.setMinHeight(762);
+        primaryStage.setMinWidth(1193);
+        primaryStage.show();
         
-//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent e) {
-//                if (null != e.getCode()) switch (e.getCode()) {
-//                    case D:
-//                        System.out.println("Mouvement à droite");
-//                        break;
-//                    case Q:
-//                        System.out.println("Mouvement à gauche");
-//                        break;
-//                    case Z:
-//                        System.out.println("Mouvement en haut");
-//                        break;
-//                    case S:
-//                        System.out.println("Mouvement en bas");
-//                        break;
-//                    case A:
-//                        System.out.println("Mouvement au dessus");
-//                        break;
-//                    case E:
-//                        System.out.println("Mouvement en dessous");
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            }
-//        });
+        
 
-        stage.setScene(scene);
-        stage.show();
         
     }
 

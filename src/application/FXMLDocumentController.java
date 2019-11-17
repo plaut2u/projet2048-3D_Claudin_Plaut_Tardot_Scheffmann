@@ -6,12 +6,9 @@
 package application;
 
 import java.io.IOException;
-import java.lang.Thread.State;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
-import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -19,13 +16,11 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Case;
@@ -35,7 +30,7 @@ import model.Plateau;
  *
  * @author Gregoire
  */
-public class FXMLDocumentController implements Initializable, ParametresApplication {
+public class FXMLDocumentController implements Initializable, ParametresApplication, ControlledScreen {
 
     @FXML
     private Pane fond;
@@ -49,82 +44,58 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
     Plateau p = new Plateau();
     boolean b = p.nouvelleCasePlateau();
     int direction;
+    ScreensController myController;
+    boolean hasWon = false;
+
+    public void setScreenParent(ScreensController screenParent) {
+        myController = screenParent;
+    }
 
     @FXML
     private void rebeginGame(MouseEvent event) {
+        Sound buttonClicked = new Sound("sound\\" + "button.wav");
+        buttonClicked.start();
+        
         System.out.println("new partie");
+        for (int i = 0; i < NBGRILLES; i++) {
+            for (Case elem : p.getPlateau()[i].getGrille()) {
+                for (int j = 0; j < list.size(); j++) {
+                    int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
+                    int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
+                    if (list.get(j).getX() == newx && list.get(j).getY() == newy) {
+                        list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
+                    }
+                    list.get(j).getPane().setVisible(false);
+                    list.remove(j);
+                }
+            }
+        }
+
+        p = new Plateau();
+        b = p.nouvelleCasePlateau();
+        list = new ArrayList<>();
+        moves.setText("0");
+        score.setText("0");
+        hasWon = false;
+
+        for (int i = 0; i < NBGRILLES; i++) {
+            for (Case elem : p.getPlateau()[i].getGrille()) {
+                int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
+                int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
+                list.add(new TuileGraphique(newx, newy, elem.getValeur(), fond));
+                list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
+                list.get(i).getPane().setVisible(true);
+                fond.getChildren().add(list.get(i).getPane());
+            }
+        }
     }
 
     @FXML
     private void quitGame(MouseEvent event) {
+        Sound buttonClicked = new Sound("sound\\" + "button.wav");
+        buttonClicked.start();
         System.out.println("quit game");
         System.exit(0);
-    }
-
-    @FXML
-    private void login(MouseEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("choixModeScene.fxml"));
-
-        Scene scene = new Scene(root);
-
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-    @FXML
-    private void beginGame(MouseEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
-
-        Scene scene = new Scene(root);
-
-//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent e) {
-//
-//                if (null != e.getCode()) {
-//                    switch (e.getCode()) {
-//                        case D:
-//                            System.out.println("Mouvement à droite");
-//                            direction = DROITE;
-//                            break;
-//                        case Q:
-//                            System.out.println("Mouvement à gauche");
-//                            direction = GAUCHE;
-//                            break;
-//                        case Z:
-//                            System.out.println("Mouvement en haut");
-//                            direction = HAUT;
-//                            break;
-//                        case S:
-//                            System.out.println("Mouvement en bas");
-//                            direction = BAS;
-//                            break;
-//                        case A:
-//                            System.out.println("Mouvement au dessus");
-//                            direction = UP;
-//                            break;
-//                        case E:
-//                            System.out.println("Mouvement en dessous");
-//                            direction = DOWN;
-//                            break;
-//                        default:
-//                            break;
-//                    }
-//                }
-//            }
-//        });
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-    private void draw() {
-
     }
 
     @Override
@@ -136,7 +107,10 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
 
         } catch (InterruptedException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /*
@@ -354,25 +328,37 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             listThread.add(tr);
 
         }
-        int compt = 0;
-        boolean flag = false;
-        while (true) {
-            for (int i = 0; i < listThread.size(); i++) {
-                if (!listThread.get(i).isAlive()) {
-                    compt++;
-                    if (compt == listThread.size()) {
-                        flag = true;
+
+        Task taskUpdate = new Task<Void>() { // on définit une tâche parallèle pour mettre à jour la vue
+            @Override
+            public Void call() throws Exception { // implémentation de la méthode protected abstract V call() dans la classe Task
+
+                // Platform.runLater est nécessaire en JavaFX car la GUI ne peut être modifiée que par le Thread courant, contrairement à Swing où on peut utiliser un autre Thread pour ça
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            //javaFX operations should go here
+                            update(2);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                }
+                });
+                return null; // la méthode call doit obligatoirement retourner un objet. Ici on n'a rien de particulier à retourner. Du coup, on utilise le type Void (avec un V majuscule) : c'est un type spécial en Java auquel on ne peut assigner que la valeur null
+                // end call
             }
-            if(flag) break;
-            compt = 0;
-        }
-        update(2);
+        };
+        Thread tr = new Thread(taskUpdate);// on crée un contrôleur de Thread
+        tr.setDaemon(true); // le Thread s'exécutera en arrière-plan (démon informatique)
+        tr.start();// et on exécute le Thread pour mettre à jour la vue (déplacement continu de la tuile horizontalement)
+
         listThread.clear();
     }
 
-    public void update(int n) throws InterruptedException {
+    public void update(int n) throws InterruptedException, IOException {
         if (n == 1) { //LA PREMIERE FOIS QU'ON LANCE LE JEU
             for (int i = 0; i < NBGRILLES; i++) {
                 for (Case elem : p.getPlateau()[i].getGrille()) {
@@ -411,6 +397,22 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                 list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
                 list.get(j).getPane().setVisible(true);
                 fond.getChildren().add(list.get(j).getPane());
+            }
+
+            //Mise a jour du score :
+            score.setText(Integer.toString(p.calculScore()));
+
+            //Test victoire ou défaite
+            if (p.calculScore() == OBJECTIF && !hasWon) {
+                Sound victory = new Sound("sound\\" + "victory.wav");
+                victory.start();
+                Main.mainContainer.loadScreen(Main.screenVictoryID, Main.screenVictoryFile);
+                myController.setScreen(Main.screenVictoryID);
+                hasWon = true;
+            }
+            if (p.getBloque()) {
+                Main.mainContainer.loadScreen(Main.screenGameOverID, Main.screenGameOverFile);
+                myController.setScreen(Main.screenGameOverID);
             }
         }
     }

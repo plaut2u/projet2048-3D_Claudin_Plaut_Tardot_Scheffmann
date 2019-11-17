@@ -2,6 +2,7 @@ package application;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /*
  * @author William
@@ -24,7 +25,7 @@ public interface ParametresApplication {
     static final int NBGRILLES = 3;
 
     // Objectif :
-    static final int OBJECTIF = 2048;
+    static final int OBJECTIF = 16;
     
     //Graphique
     static final int HAUTEURTUILE = 97;
@@ -32,4 +33,6 @@ public interface ParametresApplication {
     static final int DEBUTGRILLEX = 68;
     static final int DEBUTGRILLEY = 201;
     static final int ESPACE = 40;
+    
+    
 }

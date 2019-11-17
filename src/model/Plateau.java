@@ -73,13 +73,13 @@ public class Plateau implements Parametres, java.io.Serializable {
     // Message de victoire
     public void victory() {
         System.out.println("Victoire ! Vous avez atteint " + this.calculScore());
-        System.exit(0);
+        //System.exit(0);
     }
 
     // Message de défaite
     public void gameOver() {
         System.out.println("Perdu ! La partie est finie. Votre score est " + this.calculScore());
-        System.exit(1);
+        //System.exit(1);
     }
 
     // Calcul du score : plus haute valeur atteinte dans toutes les grilles du plateau

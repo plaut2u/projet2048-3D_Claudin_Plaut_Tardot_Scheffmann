@@ -11,21 +11,26 @@ and open the template in the editor.
 .pane {
     -fx-background-color: orange;
     -fx-border-color: black;
+    max-width : 107px;
+    max-height : 97px;
+
+    
 }
+
 
 .gridpane {
      -fx-border-color: black;
      -fx-grid-lines-visible: true;
-     /*-fx-border: 2px solid;*/
      -fx-halignment: center;
      -fx-alignment: CENTER;  
 }
 
 .tuile {
-    /*-fx-text-alignment: center;
-    -fx-halignment: center; */
+    -fx-text-alignment: center;
+    -fx-halignment: center;
     -fx-text-fill: white;
-    /*-fx-font: "Cambria";*/
     -fx-font-size: 32;
     -fx-padding: 25 44 24 44;
+    max-width : 107px;
+    max-height : 97px;
 }

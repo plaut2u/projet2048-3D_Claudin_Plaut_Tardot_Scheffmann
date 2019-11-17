@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentControllerGameOver">
+   <children>
+      <VBox alignment="CENTER" prefHeight="482.0" prefWidth="844.0" style="-fx-background-color: #4A6478; -fx-border-color: #ffae00; -fx-border-width: 5;">
+         <children>
+            <Label alignment="CENTER" text="2048-3D" textFill="#ffae00">
+               <font>
+                  <Font name="System Bold" size="73.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="180.0" prefWidth="834.0">
+               <children>
+                  <ImageView fx:id="coupeImgLeft" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/dead.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="200.0" prefHeight="162.0" prefWidth="400.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="282.0" text="Jeu Terminé !" textAlignment="CENTER" textFill="#ffae00">
+                           <font>
+                              <Font name="System Bold" size="44.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="282.0" text="Vous ne pouvez plus bouger" textAlignment="CENTER" textFill="#ffae00">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="coupeImgRight" fitHeight="140.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/dead.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="141.0" prefWidth="834.0">
+               <children>
+                  <Button fx:id="quitGameButton" mnemonicParsing="false" onMouseClicked="#quitGame" prefHeight="60.0" text="Quitter le jeu">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="continueButton" mnemonicParsing="false" onMouseClicked="#continueGame" prefHeight="53.0" prefWidth="188.0" text="Continuer la partie">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="menuButton" mnemonicParsing="false" onMouseClicked="#backToMenu" prefHeight="60.0" text="Revenir au menu">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>
