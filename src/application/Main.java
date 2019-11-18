@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.Joueur;
 
 /**
  *
@@ -19,23 +20,43 @@ import javafx.stage.Stage;
 public class Main extends Application {
     
     public static String screenLoginID = "login";
-    public static String screenLoginFile = "menuConnexionScene.fxml";
+    public static String screenLoginFile = "LoginScene.fxml";
     public static String screenMenuID = "menu";
-    public static String screenMenuFile = "choixModeScene.fxml";
+    public static String screenMenuFile = "MenuScene.fxml";
     public static String screenGameID = "game";
-    public static String screenGameFile = "gameScene.fxml";
+    public static String screenGameFile = "GameScene.fxml";
     public static String screenVictoryID = "victory";
     public static String screenVictoryFile = "VictoryScene.fxml";
     public static String screenGameOverID = "gameover";
     public static String screenGameOverFile = "GameOverScene.fxml";
+    public static String screenParamID = "param";
+    public static String screenParamFile = "ParametersScene.fxml";
+    public static String screenAccountID = "account";
+    public static String screenAccountFile = "AccountScene.fxml";
     public static ScreensController mainContainer = new ScreensController();
+    public static String cheminImg;
+    public static String skinMode;
+    public static Joueur joueur;
+    public static boolean music = true;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        mainContainer.loadScreen(Main.screenLoginID, Main.screenLoginFile);
-
+        //Skin
+        skinMode = "noel";
         
+        if(skinMode.equals("default")){
+            cheminImg = "img/default/";
+        } else if(skinMode.equals("stone")){
+            cheminImg = "img/stone/";
+        }else if(skinMode.equals("minecraft")){
+            cheminImg = "img/minecraft/";
+        }else if(skinMode.equals("noel")){
+            cheminImg = "img/noel/";
+        }
+        
+        //ouverture des ecrans
+        mainContainer.loadScreen(Main.screenLoginID, Main.screenLoginFile);
         mainContainer.setScreen(Main.screenLoginID);
         
         Group root = new Group();
@@ -43,14 +64,10 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         boolean add = scene.getStylesheets().add("css/styles.css");
         primaryStage.setScene(scene);
-//        primaryStage.sizeToScene();
         primaryStage.setMinHeight(762);
         primaryStage.setMinWidth(1193);
         primaryStage.show();
-        
-        
 
-        
     }
 
     /**
