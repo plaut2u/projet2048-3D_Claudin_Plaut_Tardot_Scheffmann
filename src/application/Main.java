@@ -43,17 +43,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         
         //Skin
-        skinMode = "noel";
-        
-        if(skinMode.equals("default")){
-            cheminImg = "img/default/";
-        } else if(skinMode.equals("stone")){
-            cheminImg = "img/stone/";
-        }else if(skinMode.equals("minecraft")){
-            cheminImg = "img/minecraft/";
-        }else if(skinMode.equals("noel")){
-            cheminImg = "img/noel/";
-        }
+        skinMode = "minecraft";
+        cheminImg = "img/" + skinMode + "/";
         
         //ouverture des ecrans
         mainContainer.loadScreen(Main.screenLoginID, Main.screenLoginFile);
@@ -62,12 +53,13 @@ public class Main extends Application {
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
         Scene scene = new Scene(root);
-        boolean add = scene.getStylesheets().add("css/styles.css");
+        boolean add = scene.getStylesheets().add("css/" + skinMode + ".css");
         primaryStage.setScene(scene);
+        primaryStage.setTitle("2048-3D");
+        primaryStage.getIcons().add(new Image("img/coupe.png"));
         primaryStage.setMinHeight(762);
         primaryStage.setMinWidth(1193);
         primaryStage.show();
-
     }
 
     /**
