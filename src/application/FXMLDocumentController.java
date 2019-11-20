@@ -5,6 +5,7 @@
  */
 package application;
 
+import static application.Main.skinMode;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,11 +15,15 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import model.Case;
 import model.Plateau;
 
@@ -27,32 +32,37 @@ import model.Plateau;
  * @author Gregoire
  */
 public class FXMLDocumentController implements Initializable, ParametresApplication, ControlledScreen {
-
+    
+    ScreensController myController;
+    
+    public void setScreenParent(ScreensController screenParent) {
+        myController = screenParent;
+    }
+    
     @FXML
     private Pane fond;
+    
     @FXML
     private Label moves;
+    
     @FXML
     private Label score;
+    
+    @FXML
+    private Label pseudoLabel;
 
     // variables globales non définies dans la vue (fichier .fxml)
     private ArrayList<TuileGraphique> list = new ArrayList<>();
     Plateau p = new Plateau();
     boolean b = p.nouvelleCasePlateau();
     int direction;
-    ScreensController myController;
     boolean hasWon = false;
-
-    public void setScreenParent(ScreensController screenParent) {
-        myController = screenParent;
-    }
 
     @FXML
     private void rebeginGame(MouseEvent event) {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
         
-        System.out.println("new partie");
         for (int i = 0; i < NBGRILLES; i++) {
             for (Case elem : p.getPlateau()[i].getGrille()) {
                 for (int j = 0; j < list.size(); j++) {
@@ -75,6 +85,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         moves.setText("0");
         score.setText("0");
         hasWon = false;
+        Main.joueur.setJeuEnCours(false);
 
         for (int i = 0; i < NBGRILLES; i++) {
             for (Case elem : p.getPlateau()[i].getGrille()) {
@@ -96,15 +107,61 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
     private void quitGame(MouseEvent event) {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
-        System.out.println("quit game");
         System.exit(0);
     }
+    
+    @FXML
+    private void disconnect(MouseEvent event) throws IOException {
+        Sound buttonClicked = new Sound("sound\\" + "button.wav");
+        buttonClicked.start();
+        
+        Main.mainContainer.loadScreen(Main.screenLoginID, Main.screenLoginFile);
+        myController.setScreen(Main.screenLoginID);
+    }
+    
+    @FXML
+    private void goToAccount(MouseEvent event) throws IOException {
+        Sound buttonClicked = new Sound("sound\\" + "button.wav");
+        buttonClicked.start();
+        
+        Parent root = FXMLLoader.load(getClass().getResource(Main.screenAccountFile));
+        Scene scene = new Scene(root);
+        boolean add = scene.getStylesheets().add("css/" + skinMode + ".css");
 
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void goToParam(MouseEvent event) throws IOException {
+        Sound buttonClicked = new Sound("sound\\" + "button.wav");
+        buttonClicked.start();
+        
+        Parent root = FXMLLoader.load(getClass().getResource(Main.screenParamFile));
+        Scene scene = new Scene(root);
+        boolean add = scene.getStylesheets().add("css/" + skinMode + ".css");
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+     private void goToMenu(MouseEvent event) throws IOException {
+        Sound buttonClicked = new Sound("sound\\" + "button.wav");
+        buttonClicked.start();
+        
+        Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
+        myController.setScreen(Main.screenMenuID);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
             System.out.println(p);
+            pseudoLabel.setText(Main.joueur.getPseudo());
             update(1);
 
         } catch (InterruptedException ex) {
@@ -384,6 +441,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     
                 }
             }
+            Main.joueur.setJeuEnCours(false);
         } else { //LES AUTRES FOIS
             //SUPRESSION DES ELEMENTS DE LA LISTE
             for (int i = 0; i < NBGRILLES; i++) {
@@ -421,11 +479,9 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
 
             //Mise a jour du score :
             score.setText(Integer.toString(p.calculScore()));
-
+            Main.joueur.setJeuEnCours(true);
             //Test victoire ou défaite
             if (p.calculScore() == OBJECTIF && !hasWon) {
-                Sound victory = new Sound("sound\\" + "victory.wav");
-                victory.start();
                 Main.mainContainer.loadScreen(Main.screenVictoryID, Main.screenVictoryFile);
                 myController.setScreen(Main.screenVictoryID);
                 hasWon = true;

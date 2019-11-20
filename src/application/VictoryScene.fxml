@@ -10,18 +10,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentControllerVictory">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentControllerVictory">
    <children>
-      <VBox alignment="CENTER" prefHeight="556.0" prefWidth="844.0" style="-fx-background-color: #4A6478; -fx-border-color: #ffae00; -fx-border-width: 5;">
+      <VBox alignment="CENTER" prefHeight="723.0" prefWidth="1178.0" styleClass="background">
          <children>
-            <Label alignment="CENTER" prefHeight="147.0" prefWidth="294.0" text="2048-3D" textFill="#ffae00">
+            <Label alignment="CENTER" prefHeight="215.0" prefWidth="464.0" styleClass="text" text="2048-3D" textFill="#ffae00">
                <font>
-                  <Font name="System Bold" size="73.0" />
+                  <Font name="System Bold" size="96.0" />
                </font>
             </Label>
             <HBox alignment="CENTER" prefHeight="180.0" prefWidth="834.0">
                <children>
-                  <ImageView fx:id="coupeImgLeft" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="coupeImgLeft" fitHeight="180.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/coupe.png" />
                      </image>
@@ -31,9 +31,9 @@
                   </ImageView>
                   <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="200.0" prefHeight="162.0" prefWidth="400.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="65.0" maxWidth="252.0" minHeight="65.0" minWidth="116.0" prefHeight="65.0" prefWidth="252.0" text="Victoire !" textAlignment="CENTER" textFill="#ffae00">
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="115.0" maxWidth="352.0" minHeight="65.0" minWidth="116.0" prefHeight="115.0" prefWidth="352.0" styleClass="text" text="Victoire !" textAlignment="CENTER" textFill="#ffae00">
                            <font>
-                              <Font name="System Bold" size="44.0" />
+                              <Font name="System Bold" size="52.0" />
                            </font>
                            <VBox.margin>
                               <Insets />
@@ -41,12 +41,12 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="400.0">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="52.0" prefWidth="210.0" text="Vous avez atteint" textAlignment="CENTER" textFill="#ffae00">
+                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="52.0" prefWidth="210.0" styleClass="text" text="Vous avez atteint" textAlignment="CENTER" textFill="#ffae00">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="objectifLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="52.0" prefWidth="69.0" text="2048" textAlignment="CENTER" textFill="#ffae00">
+                              <Label fx:id="objectifLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="52.0" prefWidth="69.0" styleClass="text" text="2048" textAlignment="CENTER" textFill="#ffae00">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -55,16 +55,24 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <ImageView fx:id="coupeImgRight" fitHeight="140.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="coupeImgRight" fitHeight="180.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/coupe.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="141.0" prefWidth="834.0">
+            <HBox alignment="CENTER" prefHeight="155.0" prefWidth="1183.0">
                <children>
                   <Button fx:id="quitGameButton" mnemonicParsing="false" onMouseClicked="#quitGame" prefHeight="60.0" text="Quitter le jeu">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" top="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="continueButton" mnemonicParsing="false" onMouseClicked="#continueGame" prefHeight="53.0" text="Continuer la partie">
                      <HBox.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </HBox.margin>
@@ -72,10 +80,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="continueButton" mnemonicParsing="false" onMouseClicked="#continueGame" prefHeight="53.0" prefWidth="188.0" text="Continuer la partie">
-                     <HBox.margin>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </HBox.margin>
+                  <Button fx:id="rebeginButton" mnemonicParsing="false" onMouseClicked="#rebeginGame" prefHeight="53.0" text="Recommencer une partie">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -89,6 +94,9 @@
                      </font>
                   </Button>
                </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

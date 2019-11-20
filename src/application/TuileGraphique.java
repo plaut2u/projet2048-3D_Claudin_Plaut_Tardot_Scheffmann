@@ -36,7 +36,7 @@ public class TuileGraphique extends Case implements ParametresApplication{
         this.fond = fd;
         
         
-        Image image = new Image("img/" + "tile" + String.valueOf(v) + ".jpg");
+        Image image = new Image(Main.cheminImg + "tile" + String.valueOf(v) + ".jpg");
         this.img = new ImageView();
         this.img.setImage(image);
         

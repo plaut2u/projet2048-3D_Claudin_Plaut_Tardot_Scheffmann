@@ -30,21 +30,25 @@ public class FXMLDocumentControllerGameOver   implements Initializable, Parametr
     
     @FXML
     private void backToMenu(MouseEvent event) throws IOException{
+        Sound buttonClicked = new Sound("sound\\" + "button.wav");
+        buttonClicked.start();
+        
+        Main.joueur.setJeuEnCours(false);
+        
         Main.mainContainer.unloadScreen(Main.screenGameID);
         Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
         myController.setScreen(Main.screenMenuID);
-        
-        Sound buttonClicked = new Sound("sound\\" + "button.wav");
-        buttonClicked.start();
     }
     
     @FXML
-    private void continueGame(MouseEvent event) throws IOException{
-        
-        myController.setScreen(Main.screenGameID);
-        
+    private void rebeginGame(MouseEvent event) throws IOException{
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
+        
+        Main.joueur.setJeuEnCours(false);
+        
+        Main.mainContainer.loadScreen(Main.screenGameID, Main.screenGameFile);
+        myController.setScreen(Main.screenGameID);
     }
     
     @FXML

@@ -6,16 +6,16 @@
 package application;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import model.Joueur;
 
 /**
  *
@@ -30,9 +30,23 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
     }
     
     @FXML
+    private ImageView loginImg;
+    
+    @FXML
+    private TextField pseudoLogIn;
+    
+    @FXML
+    private PasswordField mdpLogIn;
+    
+    
+    @FXML
     private void login(MouseEvent event) throws IOException{
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
+        //check bdd si psuedo utilisé
+        //si pseudo déjà utilisé on fait rien
+        //sinon on créé le nouveau joueur
+        Main.joueur = new Joueur(pseudoLogIn.getText(),mdpLogIn.getText());
         
         Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
         myController.setScreen(Main.screenMenuID);
@@ -42,7 +56,8 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+        Image img = new Image(Main.cheminImg + "loginImg.png");
+        loginImg.setImage(img);
     }
     
 }
