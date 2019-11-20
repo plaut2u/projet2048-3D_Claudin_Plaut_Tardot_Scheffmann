@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 3 mars 2015, 20:28:31
+    Author     : plaut2u
+*/
+
+VBox.background{
+    -fx-background-color: #2E5B16;
+    -fx-border-color: #BF0E33;
+    -fx-border-width: 5;
+}
+
+VBox.backgroundGame{
+    -fx-background-color: #2E5B16;
+}
+
+.case{
+    -fx-background-color: #FFFFFF;
+}
+
+.text{
+    -fx-text-fill: #BF0E33;
+    -fx-text-shadow: 10 10 20px #ffffff;
+}

@@ -1,0 +1,34 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 3 mars 2015, 20:28:31
+    Author     : plaut2u
+*/
+
+VBox.background{
+    -fx-background-color: #241A12;
+    -fx-border-color: #D2D2D2;
+    -fx-border-width: 5;
+}
+
+VBox.backgroundGame{
+    -fx-background-color: #241A12;
+}
+
+.case{
+    -fx-background-color: #8B8B8B;
+}
+
+@font-face {
+    font-family: "Minecraft"; 
+    src: url("@../css/MinecraftRegular.woff");
+}
+
+.text{
+    -fx-text-fill: #D2D2D2;
+    -fx-font: Minecraft;
+}
+
