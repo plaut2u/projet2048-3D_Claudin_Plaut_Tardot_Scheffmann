@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentControllerMenu">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="723.0" prefWidth="1178.0" styleClass="background">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="1168.0" style="-fx-background-color: #FFFFFF;">
+               <children>
+                  <ImageView fx:id="goBackButton" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#disconnect" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/disconnect.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="pseudoLabel" alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="1059.0" text="killer54" textFill="#333333">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="account" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#goToAccount" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../img/avatar.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="paramButton" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#goToParam" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../img/param.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" styleClass="text" text="2048-3D" textFill="#ffae00">
+               <font>
+                  <Font name="System Bold" size="96.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="150.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="80.0" prefWidth="335.0" styleClass="text" text="Choisissez votre mode de jeu" textAlignment="CENTER" textFill="#ffae00">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="164.0" prefWidth="1168.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="60.0" text="Jouer en Multijouer VS">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#soloGame" prefHeight="60.0" text="Jouer en Solo">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="60.0" text="Jouer en Multijoueur Coop">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="continueGameButton" mnemonicParsing="false" onMouseClicked="#continueGame" prefHeight="60.0" text="Continuer la partie" visible="false">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="newGameButton" mnemonicParsing="false" onMouseClicked="#beginGame" prefHeight="60.0" text="Nouvelle partie" visible="false">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>
