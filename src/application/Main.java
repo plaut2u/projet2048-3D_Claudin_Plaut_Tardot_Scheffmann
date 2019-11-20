@@ -43,7 +43,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         
         //Skin
-        skinMode = "minecraft";
+        skinMode = "temple";
         cheminImg = "img/" + skinMode + "/";
         
         //ouverture des ecrans
