@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentControllerAccount">
+   <children>
+      <VBox alignment="CENTER" prefHeight="616.0" prefWidth="800.0" styleClass="background">
+         <children>
+            <Label alignment="CENTER" styleClass="text" text="Mon Compte" textFill="#ffae00">
+               <font>
+                  <Font name="System Bold" size="46.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="300.0" styleClass="text" text="Voici les détails de votre compte" textAlignment="CENTER" textFill="#ffae00">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" prefHeight="107.0" prefWidth="790.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="790.0">
+                     <children>
+                        <Label styleClass="text" text="Pseudo :" textFill="#ffae00">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="100.0" top="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="pseudoLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="text" text="Killer" textFill="#ffae00">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" top="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="790.0">
+                     <children>
+                        <Label styleClass="text" text="Nombres de victoires :" textFill="#ffae00">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="100.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="nombreVictoires" alignment="CENTER" contentDisplay="CENTER" styleClass="text" text="17" textFill="#ffae00">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="790.0">
+                     <children>
+                        <Label styleClass="text" text="Meilleur score :" textFill="#ffae00">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="100.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="meilleurScore" alignment="CENTER" contentDisplay="CENTER" styleClass="text" text="64" textFill="#ffae00">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="790.0">
+                     <children>
+                        <Label styleClass="text" text="Changer de pseudo :" textFill="#ffae00">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="100.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="errorPseudo" text="Erreur" textFill="RED" visible="false">
+                           <HBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Italic" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="60.0" prefWidth="790.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="790.0">
+                           <children>
+                              <Label styleClass="text" text="Nouveau Pseudo" textFill="#ffae00">
+                                 <font>
+                                    <Font name="System Italic" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="140.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="newPseudo">
+                                 <HBox.margin>
+                                    <Insets left="87.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label styleClass="text" text="Confirmer le nouveau pseudo" textFill="#ffae00">
+                                 <font>
+                                    <Font name="System Italic" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="140.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="confirmNewPseudo">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="790.0">
+                     <children>
+                        <Label styleClass="text" text="Changer de mot de passe :" textFill="#ffae00">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="100.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="errorPassword" text="Erreur" textFill="RED" visible="false">
+                           <font>
+                              <Font name="System Italic" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label styleClass="text" text="Ancien mot de passe" textFill="#ffae00">
+                           <font>
+                              <Font name="System Italic" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="140.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <PasswordField fx:id="oldPassword">
+                           <HBox.margin>
+                              <Insets left="87.0" />
+                           </HBox.margin>
+                        </PasswordField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label styleClass="text" text="Nouveau mot de passe" textFill="#ffae00">
+                           <font>
+                              <Font name="System Italic" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="140.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <PasswordField fx:id="newPassword">
+                           <HBox.margin>
+                              <Insets left="71.0" />
+                           </HBox.margin>
+                        </PasswordField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label styleClass="text" text="Confirmer nouveau mot de passe" textFill="#ffae00">
+                           <font>
+                              <Font name="System Italic" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="140.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <PasswordField fx:id="confirmNewPassword" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="disconnectButton" mnemonicParsing="false" onMouseClicked="#disc" prefHeight="37.0" prefWidth="136.0" text="Se déconnecter">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="cancelButtonAccount" mnemonicParsing="false" onMouseClicked="#cancel" prefWidth="136.0" text="Annuler">
+                     <HBox.margin>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="okButtonAccount" mnemonicParsing="false" onMouseClicked="#ok" prefWidth="136.0" text="Ok">
+                     <HBox.margin>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>
