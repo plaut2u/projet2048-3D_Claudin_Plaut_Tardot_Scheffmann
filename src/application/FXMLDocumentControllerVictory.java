@@ -5,6 +5,7 @@
  */
 package application;
 
+import static application.Main.skinMode;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -27,6 +29,9 @@ public class FXMLDocumentControllerVictory implements Initializable, ParametresA
 
     @FXML
     private Label objectifLabel;
+    
+    @FXML
+    private VBox VBoxBackground;
     
     
     /**
@@ -80,6 +85,7 @@ public class FXMLDocumentControllerVictory implements Initializable, ParametresA
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         objectifLabel.setText(Integer.toString(OBJECTIF));
+        VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
         if(Main.music){
             Sound victory = new Sound("sound\\" + "victory.wav");
             victory.start();

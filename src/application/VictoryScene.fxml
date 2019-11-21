@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentControllerVictory">
    <children>
-      <VBox alignment="CENTER" prefHeight="723.0" prefWidth="1178.0" styleClass="background">
+      <VBox fx:id="VBoxBackground" alignment="CENTER" prefHeight="723.0" prefWidth="1178.0" styleClass="background">
          <children>
             <Label alignment="CENTER" prefHeight="215.0" prefWidth="464.0" styleClass="text" text="2048-3D" textFill="#ffae00">
                <font>

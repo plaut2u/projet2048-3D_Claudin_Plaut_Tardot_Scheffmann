@@ -5,16 +5,14 @@
  */
 package application;
 
+import static application.Main.skinMode;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -27,6 +25,9 @@ public class FXMLDocumentControllerGameOver   implements Initializable, Parametr
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
+    
+    @FXML
+    private VBox VBoxBackground;
     
     @FXML
     private void backToMenu(MouseEvent event) throws IOException{
@@ -63,6 +64,7 @@ public class FXMLDocumentControllerGameOver   implements Initializable, Parametr
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
     }
     
 }

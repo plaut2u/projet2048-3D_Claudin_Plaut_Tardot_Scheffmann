@@ -24,7 +24,13 @@ import javafx.stage.Stage;
  * @author Gregoire
  */
 public class FXMLDocumentControllerParam implements Initializable, ParametresApplication{
-
+    
+    ScreensController myController;
+    
+    public void setScreenParent(ScreensController screenParent){
+        myController = screenParent;
+    }
+    
     private boolean tempMusic;
     private String tempStyle;
     private ObservableList<String> availableChoices;
@@ -62,6 +68,7 @@ public class FXMLDocumentControllerParam implements Initializable, ParametresApp
             Main.skinMode = "noel";
         }
         Main.cheminImg = "img/" + Main.skinMode + "/";
+        
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
     }

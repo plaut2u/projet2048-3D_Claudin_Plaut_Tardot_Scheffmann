@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -39,6 +40,9 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
     
     @FXML
     private Button continueGameButton;
+    
+    @FXML
+    private VBox VBoxBackground;
     
     @FXML
     private void soloGame(MouseEvent event) throws IOException {
@@ -111,5 +115,6 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         pseudoLabel.setText(Main.joueur.getPseudo());
+        VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
     }
 }

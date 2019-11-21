@@ -5,6 +5,7 @@
  */
 package application;
 
+import static application.Main.skinMode;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Joueur;
 
@@ -50,6 +53,9 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
     
     @FXML
     private PasswordField mdpSignInVerif;
+    
+    @FXML
+    private VBox VBoxBackground;
     
 
     @FXML
@@ -104,6 +110,7 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
         loginImg.setImage(img);
         Image img2 = new Image(Main.cheminImg + "title.png");
         titleImg.setImage(img2);
+        VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
     }
 
 }

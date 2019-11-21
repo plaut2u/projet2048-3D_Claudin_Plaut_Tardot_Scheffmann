@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Case;
 import model.Plateau;
@@ -50,6 +51,9 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
     
     @FXML
     private Label pseudoLabel;
+    
+    @FXML
+    private VBox VBoxBackground;
 
     // variables globales non définies dans la vue (fichier .fxml)
     private ArrayList<TuileGraphique> list = new ArrayList<>();
@@ -162,6 +166,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             // TODO
             System.out.println(p);
             pseudoLabel.setText(Main.joueur.getPseudo());
+            VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
             update(1);
 
         } catch (InterruptedException ex) {
