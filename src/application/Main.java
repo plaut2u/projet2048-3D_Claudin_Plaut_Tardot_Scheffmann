@@ -39,7 +39,7 @@ public class Main extends Application {
     public static Sound musicTheme;
     public static String skinMode;
     public static Joueur joueur;
-    public static boolean music = true;
+    public static boolean music = false;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -50,6 +50,7 @@ public class Main extends Application {
         cheminSound = "sound\\" + skinMode + "\\";
         
         manageMusic("new");
+        if(!music) manageMusic("stop");
 
         
         //ouverture des ecrans
