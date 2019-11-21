@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  *
  * @author Gregoire
  */
-public class FXMLDocumentControllerParam implements Initializable, ParametresApplication{
+public class FXMLDocumentControllerParam implements Initializable, ParametresApplication, ControlledScreen{
     
     ScreensController myController;
     
@@ -68,6 +68,15 @@ public class FXMLDocumentControllerParam implements Initializable, ParametresApp
             Main.skinMode = "noel";
         }
         Main.cheminImg = "img/" + Main.skinMode + "/";
+        Main.cheminSound = "sound\\" + Main.skinMode + "\\";
+        if(Main.music == true){
+            Main.manageMusic("changed");
+        } else{
+            Main.manageMusic("stop");
+        }
+        
+        Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
+        Main.mainContainer.setScreen(Main.screenMenuID);
         
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();

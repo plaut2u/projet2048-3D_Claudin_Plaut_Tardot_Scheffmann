@@ -35,6 +35,8 @@ public class Main extends Application {
     public static String screenAccountFile = "AccountScene.fxml";
     public static ScreensController mainContainer = new ScreensController();
     public static String cheminImg;
+    public static String cheminSound;
+    public static Sound musicTheme;
     public static String skinMode;
     public static Joueur joueur;
     public static boolean music = true;
@@ -43,8 +45,12 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         
         //Skin
-        skinMode = "temple";
+        skinMode = "default";
         cheminImg = "img/" + skinMode + "/";
+        cheminSound = "sound\\" + skinMode + "\\";
+        
+        manageMusic("new");
+
         
         //ouverture des ecrans
         mainContainer.loadScreen(Main.screenLoginID, Main.screenLoginFile);
@@ -67,6 +73,19 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public static void manageMusic(String s){
+        if(s.equals("new")){
+            musicTheme = new Sound(cheminSound + "theme.wav");
+            musicTheme.start();
+        } else if(s.equals("changed")){
+            musicTheme.stop();
+            musicTheme = new Sound(cheminSound + "theme.wav");
+            musicTheme.start();
+        } else if(s.equals("stop")){
+            musicTheme.stop();
+        }
     }
     
 }

@@ -168,7 +168,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             pseudoLabel.setText(Main.joueur.getPseudo());
             VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
             update(1);
-
+            
         } catch (InterruptedException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -177,10 +177,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
 
     }
 
-    /*
-     * Méthodes listeners pour gérer les événements (portent les mêmes noms que
-     * dans Scene Builder
-     */
     @FXML
     public void keyPressed(KeyEvent ke
     ) throws InterruptedException {
@@ -485,6 +481,8 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             //Mise a jour du score :
             score.setText(Integer.toString(p.calculScore()));
             Main.joueur.setJeuEnCours(true);
+            VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
+            
             //Test victoire ou défaite
             if (p.calculScore() == OBJECTIF && !hasWon) {
                 Main.mainContainer.loadScreen(Main.screenVictoryID, Main.screenVictoryFile);
@@ -497,4 +495,5 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             }
         }
     }
+    
 }

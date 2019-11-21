@@ -25,7 +25,7 @@ public interface ParametresApplication {
     static final int NBGRILLES = 3;
 
     // Objectif :
-    static final int OBJECTIF = 16;
+    static final int OBJECTIF = 64;
     
     //Graphique
     static final int HAUTEURTUILE = 97;
