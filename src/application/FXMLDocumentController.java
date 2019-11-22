@@ -190,19 +190,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     check = true;
                 }
             }
-            if (check) {
-                moves.setText(Integer.toString(Integer.parseInt(moves.getText()) + 1));
-                boolean b2 = p.lanceurDeplacerCasePlateau(direction);
-                if (b2 == true) {
-                    b = p.nouvelleCasePlateau();
-                    System.out.println(b);
-                    if (b == false) {
-                        p.setBloque(true);
-                        System.out.println("Bmoquééééé");
-                    }
-                }
-            }
-            System.out.println(p);
         } else if (touche.compareTo("d") == 0) {
             direction = DROITE;
             for (int i = 0; i < list.size(); i++) {
@@ -210,19 +197,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     list.get(i).setObjectifx(list.get(i).getObjectifx() + LARGEURTUILE);
                     check = true;
                 }
-            }
-            if (check) {
-                moves.setText(Integer.toString(Integer.parseInt(moves.getText()) + 1));
-                boolean b2 = p.lanceurDeplacerCasePlateau(direction);
-                if (b2 == true) {
-                    //b = g.nouvelleCase();
-                    b = p.nouvelleCasePlateau();
-                    if (b == false) {
-                        p.setBloque(true);
-                        System.out.println("Bmoquééééé");
-                    }
-                }
-                System.out.println(p);
             }
         } else if (touche.compareTo("z") == 0) {
             direction = HAUT;
@@ -232,19 +206,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     check = true;
                 }
             }
-            if (check) {
-                moves.setText(Integer.toString(Integer.parseInt(moves.getText()) + 1));
-                boolean b2 = p.lanceurDeplacerCasePlateau(direction);
-                if (b2 == true) {
-                    //b = g.nouvelleCase();
-                    b = p.nouvelleCasePlateau();
-                    if (b == false) {
-                        p.setBloque(true);
-                        System.out.println("Bmoquééééé");
-                    }
-                }
-                System.out.println(p);
-            }
         } else if (touche.compareTo("s") == 0) {
             direction = BAS;
             for (int i = 0; i < list.size(); i++) {
@@ -252,19 +213,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     list.get(i).setObjectify(list.get(i).getObjectify() + HAUTEURTUILE);
                     check = true;
                 }
-            }
-            if (check) {
-                moves.setText(Integer.toString(Integer.parseInt(moves.getText()) + 1));
-                boolean b2 = p.lanceurDeplacerCasePlateau(direction);
-                if (b2 == true) {
-                    //b = g.nouvelleCase();
-                    b = p.nouvelleCasePlateau();
-                    if (b == false) {
-                        p.setBloque(true);
-                        System.out.println("Bmoquééééé");
-                    }
-                }
-                System.out.println(p);
             }
         } else if (touche.compareTo("e") == 0) {
             direction = DOWN;
@@ -274,19 +222,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     check = true;
                 }
             }
-            if (check) {
-                moves.setText(Integer.toString(Integer.parseInt(moves.getText()) + 1));
-                boolean b2 = p.lanceurDeplacerCasePlateau(direction);
-                if (b2 == true) {
-                    //b = g.nouvelleCase();
-                    b = p.nouvelleCasePlateau();
-                    if (b == false) {
-                        p.setBloque(true);
-                        System.out.println("Bmoquééééé");
-                    }
-                }
-                System.out.println(p);
-            }
         } else if (touche.compareTo("a") == 0) {
             direction = UP;
             for (int i = 0; i < list.size(); i++) {
@@ -295,21 +230,18 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     check = true;
                 }
             }
-            if (check) {
+        }
+        if (check) {
                 moves.setText(Integer.toString(Integer.parseInt(moves.getText()) + 1));
-                boolean b2 = p.lanceurDeplacerCasePlateau(direction);
+                boolean b2 = p.lanceurDeplacerPlateau(direction);
                 if (b2 == true) {
-                    //b = g.nouvelleCase();
                     b = p.nouvelleCasePlateau();
-                    if (b == false) {
-                        p.setBloque(true);
-                        System.out.println("Bmoquééééé");
-                    }
                 }
                 System.out.println(p);
-            }
         }
-
+        if(!p.checkMovesPlateau()){
+            p.setBloque(true);
+        }
         ArrayList<Thread> listThread = new ArrayList<>();
 
         for (int k = 0; k < list.size(); k++) {

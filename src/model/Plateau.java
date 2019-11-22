@@ -21,7 +21,7 @@ public class Plateau implements Parametres, java.io.Serializable {
 
     // Constructeur
     public Plateau() {
-        System.out.println("[DEBUG] Plateau créé");
+
         this.plateau = new Grille[NBGRILLES];
         for (int i = 0; i < this.plateau.length; i++) {
             Grille g = new Grille();
@@ -165,7 +165,6 @@ public class Plateau implements Parametres, java.io.Serializable {
 
         switch (direction) {
             case UP:
-                System.out.println("[DEBUG] UP");
                 if (compteur > -1) {
                     // déplacement
                     int[][] temp = new int[TAILLE][TAILLE];     // tableau des cases de la grille à déplacer
@@ -173,13 +172,10 @@ public class Plateau implements Parametres, java.io.Serializable {
                     // récupérer la grille à faire bouger
                     for (Case c0 : this.plateau[grilleADeplacer].getGrille()) {
                         temp[c0.getX()][c0.getY()] = c0.getValeur();
-                        System.out.println("[DEBUG] C0 : "+c0);
-                        System.out.println("[DEBUG] temp["+c0.getX()+"]["+c0.getY()+"] = "+c0.getValeur());
                     }
                     // fusion dans la grille cible
                     for (Case c1 : this.plateau[compteur].getGrille()) {
                         // pour chaque case existante de la grille cible on check la valeur de la case
-                        System.out.println("[DEBUG] C1 : "+c1);
                         if (temp[c1.getX()][c1.getY()] == c1.getValeur()) {
                             // si les valeurs des cases situées aux mêmes coordonnées dans la grille cible et dans la grille à bouger
                             // sont les mêmes alors on double la valeur de la case de la grille cible
@@ -191,16 +187,12 @@ public class Plateau implements Parametres, java.io.Serializable {
                             // sinon la valeur de la case de la grille à bouger reste la même
                             temp[c1.getX()][c1.getY()] = 0;     // 0 = la case ne bougera pas
                         }
-                        System.out.println("[DEBUG] temp["+c1.getX()+"]["+c1.getY()+"] = "+c1.getValeur());
                     }
                     for (int x = 0; x < TAILLE; x++) {
                         for (int y = 0; y < TAILLE; y++) {
-                            System.out.println("[DEBUG] temp["+x+"]["+y+"] = "+temp[x][y]);
                             if (temp[x][y] > 0) {
-                                System.out.println("[DEBUG] move = true");
                                 Case ajout = new Case(x, y, temp[x][y]);
                                 ajout.setGrille(this.plateau[compteur]);
-                                System.out.println("[DEBUG] ajout : " +ajout);
                                 //ajout.setGrille(this.plateau[compteur]);
                                 this.plateau[compteur].getGrille().add(ajout);
                                 //this.plateau[grilleADeplacer].getGrille().add(ajout);
@@ -211,17 +203,15 @@ public class Plateau implements Parametres, java.io.Serializable {
                     }
                     // suppression des cases bougées dans grille à bouger
                     for (Case c2 : this.plateau[grilleADeplacer].getGrille()) {
-                        System.out.println("[DEBUG] C2 : "+c2);
                         if (temp[c2.getX()][c2.getY()] < 0) {   // si -1 alors on supprime la case car elle a bougé
                             temp2.add(c2);
                             //c2.setValeur(0);
                         }
                     }
-                    System.out.println("[DEBUG] temp2 : "+temp2);
                     for (Case c : temp2) {
                         this.plateau[grilleADeplacer].getGrille().remove(c);
                     }
-                    if(temp2 != null) System.out.println("[DEBUG] temp2 : "+temp2);
+                    if(temp2 != null) ;
 
                     // récursivité
                     this.deplacerGrillesRecursif(grilleADeplacer - 1, compteur - 1, direction);
@@ -229,7 +219,6 @@ public class Plateau implements Parametres, java.io.Serializable {
                 break;
 
             default:    // SI direction = DOWN
-                System.out.println("[DEBUG] DOWN");
                 if (compteur < 3) {
                     // Même code que pour UP
                     // déplacement
@@ -237,27 +226,20 @@ public class Plateau implements Parametres, java.io.Serializable {
                     HashSet<Case> temp2 = new HashSet<>();
                     for (Case c0 : this.plateau[grilleADeplacer].getGrille()) {
                         temp[c0.getX()][c0.getY()] = c0.getValeur();
-                        System.out.println("[DEBUG] C0 : "+c0);
-                        System.out.println("[DEBUG] temp["+c0.getX()+"]["+c0.getY()+"] = "+c0.getValeur());
                     }
                     for (Case c1 : this.plateau[compteur].getGrille()) {
-                        System.out.println("[DEBUG] C1 : "+c1);
                         if (temp[c1.getX()][c1.getY()] == c1.getValeur()) {
                             c1.setValeur(c1.getValeur() * 2);
                             temp[c1.getX()][c1.getY()] = -1;
                         } else {
                             temp[c1.getX()][c1.getY()] = 0;
                         }
-                        System.out.println("[DEBUG] temp["+c1.getX()+"]["+c1.getY()+"] = "+c1.getValeur());
                     }
                     for (int x = 0; x < TAILLE; x++) {
                         for (int y = 0; y < TAILLE; y++) {
-                            System.out.println("[DEBUG] temp["+x+"]["+y+"] = "+temp[x][y]);
                             if (temp[x][y] > 0) {
-                                System.out.println("[DEBUG] move = true");
                                 Case ajout = new Case(x, y, temp[x][y]);
-                                ajout.setGrille(this.plateau[grilleADeplacer]);
-                                System.out.println("[DEBUG] ajout : " +ajout);
+                                ajout.setGrille(this.plateau[compteur]);
                                 //ajout.setGrille(this.plateau[compteur]);
                                 this.plateau[compteur].getGrille().add(ajout);
                                 //this.plateau[grilleADeplacer].getGrille().add(ajout);
@@ -267,17 +249,14 @@ public class Plateau implements Parametres, java.io.Serializable {
                         }
                     }
                     for (Case c2 : this.plateau[grilleADeplacer].getGrille()) {
-                        System.out.println("[DEBUG] C2 : "+c2);
                         if (temp[c2.getX()][c2.getY()] < 0) {
                             temp2.add(c2);
                             //c2.setValeur(0);
                         }
                     }
-                    System.out.println("[DEBUG] temp2 : "+temp2);
                     for (Case c : temp2) {
                         this.plateau[grilleADeplacer].getGrille().remove(c);
                     }
-                    if(temp2 != null) System.out.println("[DEBUG] temp2 : "+temp2);
 
                     // récursivité
                     this.deplacerGrillesRecursif(grilleADeplacer + 1, compteur + 1, direction);

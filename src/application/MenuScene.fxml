@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentControllerMenu">
     <children>
-      <VBox fx:id="VBoxBackground" prefHeight="707.0" prefWidth="1178.0" styleClass="background">
+      <VBox fx:id="VBoxBackground" prefHeight="723.0" prefWidth="1178.0" styleClass="background">
          <children>
                 <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="1168.0" style="-fx-background-color: #FFFFFF;">
                     <children>
@@ -52,7 +52,7 @@
                 </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="704.0" prefWidth="1178.0">
                <children>
-                  <ImageView fx:id="imgLeft" fitHeight="682.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgLeft" fitHeight="672.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                     <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="778.0">
                         <children>
                             <ImageView fx:id="titleImg" fitHeight="150" pickOnBounds="true" preserveRatio="true">
@@ -112,7 +112,7 @@
                             </HBox>
                         </children>
                     </VBox>
-                  <ImageView fx:id="imgRight" fitHeight="682.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgRight" fitHeight="672.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
          </children>

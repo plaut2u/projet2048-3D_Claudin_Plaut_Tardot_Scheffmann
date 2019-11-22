@@ -93,7 +93,6 @@ public class Grille implements Parametres {
             if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
                 this.valeurMax = ajout.getValeur();
             }
-            System.out.println("[DEBUG] Nouvelle "+ajout);
             return true;
         } else {
             return false;
@@ -199,7 +198,6 @@ public class Grille implements Parametres {
                     || (direction == GAUCHE && extremites[rangee].getX() != compteur)
                     || (direction == DROITE && extremites[rangee].getX() != TAILLE - 1 - compteur)) {
                 this.grille.remove(extremites[rangee]);
-                System.out.println("[DEBUG] Déplacement :\n\tAvant : "+extremites[rangee]);
                 switch (direction) {
                     case HAUT:
                         extremites[rangee].setY(compteur);
@@ -215,15 +213,12 @@ public class Grille implements Parametres {
                         break;
                 }
                 this.grille.add(extremites[rangee]);
-                System.out.println("\tAprès : "+extremites[rangee]);
                 deplacement = true;
             }
             Case voisin = extremites[rangee].getVoisinDirect(-direction);
             if (voisin != null) {
                 if (extremites[rangee].valeurEgale(voisin)) {
-                    System.out.println("[DEBUG] Fusion :\n\tAvant : "+extremites[rangee]+" & " +voisin);
                     this.fusion(extremites[rangee]);
-                    System.out.println("\tAprès : "+extremites[rangee]);
                     extremites[rangee] = voisin.getVoisinDirect(-direction);
                     this.grille.remove(voisin);
                     this.deplacerCasesRecursif(extremites, rangee, direction, compteur + 1);
