@@ -15,11 +15,6 @@
     <children>
         <VBox fx:id="VBoxBackground" alignment="CENTER" prefHeight="723.0" prefWidth="1178.0" styleClass="background">
             <children>
-                <!-- <Label alignment="CENTER" prefHeight="92.0" prefWidth="392.0" styleClass="text" text="2048-3D" textFill="#ffae00">
-                   <font>
-                      <Font name="System Bold" size="85.0" />
-                   </font>
-                </Label> -->
                 <ImageView fx:id="titleImg" fitHeight="130" fitWidth="392" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
                         <Insets bottom="20.0" left="20.0" top="20.0" />

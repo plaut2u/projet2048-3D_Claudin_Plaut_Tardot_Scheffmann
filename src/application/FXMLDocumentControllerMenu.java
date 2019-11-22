@@ -16,6 +16,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -43,6 +45,15 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
     
     @FXML
     private VBox VBoxBackground;
+    
+    @FXML
+    private ImageView titleImg;
+    
+    @FXML
+    private ImageView imgLeft;
+    
+    @FXML
+    private ImageView imgRight;
     
     @FXML
     private void soloGame(MouseEvent event) throws IOException {
@@ -115,6 +126,12 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         pseudoLabel.setText(Main.joueur.getPseudo());
+        Image img = new Image(Main.cheminImg + "title.png");
+        titleImg.setImage(img);
+        Image imgL = new Image(Main.cheminImg + "menuImgLeft.png");
+        imgLeft.setImage(imgL);
+        Image imgR = new Image(Main.cheminImg + "menuImgRight.png");
+        imgRight.setImage(imgR);
         VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
     }
 }

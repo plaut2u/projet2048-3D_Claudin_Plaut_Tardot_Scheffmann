@@ -45,9 +45,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         
         //Skin
-        skinMode = "default";
+        skinMode = "temple";
         cheminImg = "img/" + skinMode + "/";
-        cheminSound = "sound\\" + skinMode + "\\";
+        cheminSound = "sound/" + skinMode + "/";
         
         manageMusic("new");
         if(!music) manageMusic("stop");
