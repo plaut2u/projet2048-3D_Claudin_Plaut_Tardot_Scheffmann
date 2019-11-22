@@ -107,7 +107,7 @@ public class FXMLDocumentControllerParam implements Initializable, ParametresApp
         } else if(Main.skinMode.equals("minecraft")){
             styleChoicer.getSelectionModel().select("Minecraft");
         } else if(Main.skinMode.equals("noel")){
-            styleChoicer.getSelectionModel().select("Par défaut");
+            styleChoicer.getSelectionModel().select("Noël");
         }
     }
 

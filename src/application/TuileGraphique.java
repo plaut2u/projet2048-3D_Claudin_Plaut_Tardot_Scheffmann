@@ -39,18 +39,7 @@ public class TuileGraphique extends Case implements ParametresApplication{
         Image image = new Image(Main.cheminImg + "tile" + String.valueOf(v) + ".jpg");
         this.img = new ImageView();
         this.img.setImage(image);
-        
-        
-//        this.p.getStyleClass().add("pane");
-//        this.c.getStyleClass().add("tuile");
-//        GridPane.setHalignment(this.c, HPos.CENTER);
         GridPane.setHalignment(this.img, HPos.CENTER);
-//      
-//        this.p.getChildren().add(this.c);   
-//        this.p.setLayoutX(super.getX());
-//        this.p.setLayoutY(super.getY());
-//        this.p.setVisible(true);
-//        this.c.setVisible(true);
     }
 
     //GETTERS

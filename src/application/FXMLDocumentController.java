@@ -33,25 +33,25 @@ import model.Plateau;
  * @author Gregoire
  */
 public class FXMLDocumentController implements Initializable, ParametresApplication, ControlledScreen {
-    
+
     ScreensController myController;
-    
+
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
-    
+
     @FXML
     private Pane fond;
-    
+
     @FXML
     private Label moves;
-    
+
     @FXML
     private Label score;
-    
+
     @FXML
     private Label pseudoLabel;
-    
+
     @FXML
     private VBox VBoxBackground;
 
@@ -66,7 +66,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
     private void rebeginGame(MouseEvent event) {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
-        
+
         for (int i = 0; i < NBGRILLES; i++) {
             for (Case elem : p.getPlateau()[i].getGrille()) {
                 for (int j = 0; j < list.size(); j++) {
@@ -99,7 +99,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
 //                list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
 //                list.get(i).getPane().setVisible(true);
 //                fond.getChildren().add(list.get(i).getPane());
-                
+
                 list.get(i).getImg().relocate(list.get(i).getPosx(), list.get(i).getPosy());
                 list.get(i).getImg().setVisible(true);
                 fond.getChildren().add(list.get(i).getImg());
@@ -113,21 +113,21 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         buttonClicked.start();
         System.exit(0);
     }
-    
+
     @FXML
     private void disconnect(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
-        
+
         Main.mainContainer.loadScreen(Main.screenLoginID, Main.screenLoginFile);
         myController.setScreen(Main.screenLoginID);
     }
-    
+
     @FXML
     private void goToAccount(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
-        
+
         Parent root = FXMLLoader.load(getClass().getResource(Main.screenAccountFile));
         Scene scene = new Scene(root);
         boolean add = scene.getStylesheets().add("css/" + skinMode + ".css");
@@ -136,12 +136,12 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
     private void goToParam(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
-        
+
         Parent root = FXMLLoader.load(getClass().getResource(Main.screenParamFile));
         Scene scene = new Scene(root);
         boolean add = scene.getStylesheets().add("css/" + skinMode + ".css");
@@ -150,16 +150,16 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
-     private void goToMenu(MouseEvent event) throws IOException {
+    private void goToMenu(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
-        
+
         Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
         myController.setScreen(Main.screenMenuID);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -168,7 +168,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             pseudoLabel.setText(Main.joueur.getPseudo());
             VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
             update(1);
-            
+
         } catch (InterruptedException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -190,23 +190,20 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     check = true;
                 }
             }
-        }
-        if (check) {
-            moves.setText(Integer.toString(Integer.parseInt(moves.getText()) + 1));
-            boolean b2 = p.lanceurDeplacerCasePlateau(direction);
-            if (b2 == true) {
-                //b = g.nouvelleCase();
-                b = p.nouvelleCasePlateau();
-                if (b == false) {
-                    p.gameOver();
+            if (check) {
+                moves.setText(Integer.toString(Integer.parseInt(moves.getText()) + 1));
+                boolean b2 = p.lanceurDeplacerCasePlateau(direction);
+                if (b2 == true) {
+                    b = p.nouvelleCasePlateau();
+                    System.out.println(b);
+                    if (b == false) {
+                        p.setBloque(true);
+                        System.out.println("Bmoquééééé");
+                    }
                 }
             }
             System.out.println(p);
-            if (p.calculScore() >= OBJECTIF) {
-                p.victory();
-            }
-        } else if (touche.compareTo(
-                "d") == 0) {
+        } else if (touche.compareTo("d") == 0) {
             direction = DROITE;
             for (int i = 0; i < list.size(); i++) {
                 if ((list.get(i).getObjectifx() < DEBUTGRILLEX + LARGEURTUILE * 2 && list.get(i).getObjectifx() >= DEBUTGRILLEX) || (list.get(i).getObjectifx() < DEBUTGRILLEX + LARGEURTUILE * (2 + TAILLE) + ESPACE && list.get(i).getObjectifx() >= TAILLE * LARGEURTUILE + DEBUTGRILLEX + ESPACE) || (list.get(i).getObjectifx() < (TAILLE * 2 + 2) * LARGEURTUILE + 2 * ESPACE + DEBUTGRILLEX && list.get(i).getObjectifx() >= (TAILLE * 2) * LARGEURTUILE + 2 * ESPACE + DEBUTGRILLEX)) { // possible uniquement si on est pas dans la colonne la plus à droite (taille de la fenêtre - 2*taille d'une case - taille entre la grille et le bord de la fenêtre)
@@ -221,16 +218,13 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     //b = g.nouvelleCase();
                     b = p.nouvelleCasePlateau();
                     if (b == false) {
-                        p.gameOver();
+                        p.setBloque(true);
+                        System.out.println("Bmoquééééé");
                     }
                 }
                 System.out.println(p);
-                if (p.calculScore() >= OBJECTIF) {
-                    p.victory();
-                }
             }
-        } else if (touche.compareTo(
-                "z") == 0) {
+        } else if (touche.compareTo("z") == 0) {
             direction = HAUT;
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getObjectify() > DEBUTGRILLEY) {
@@ -245,16 +239,13 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     //b = g.nouvelleCase();
                     b = p.nouvelleCasePlateau();
                     if (b == false) {
-                        p.gameOver();
+                        p.setBloque(true);
+                        System.out.println("Bmoquééééé");
                     }
                 }
                 System.out.println(p);
-                if (p.calculScore() >= OBJECTIF) {
-                    p.victory();
-                }
             }
-        } else if (touche.compareTo(
-                "s") == 0) {
+        } else if (touche.compareTo("s") == 0) {
             direction = BAS;
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getObjectify() < DEBUTGRILLEY + 2 * HAUTEURTUILE) {
@@ -269,16 +260,13 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     //b = g.nouvelleCase();
                     b = p.nouvelleCasePlateau();
                     if (b == false) {
-                        p.gameOver();
+                        p.setBloque(true);
+                        System.out.println("Bmoquééééé");
                     }
                 }
                 System.out.println(p);
-                if (p.calculScore() >= OBJECTIF) {
-                    p.victory();
-                }
             }
-        } else if (touche.compareTo(
-                "e") == 0) {
+        } else if (touche.compareTo("e") == 0) {
             direction = DOWN;
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getObjectifx() >= DEBUTGRILLEX && list.get(i).getObjectifx() <= 2 * TAILLE * LARGEURTUILE + DEBUTGRILLEX + ESPACE) {
@@ -293,16 +281,13 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     //b = g.nouvelleCase();
                     b = p.nouvelleCasePlateau();
                     if (b == false) {
-                        p.gameOver();
+                        p.setBloque(true);
+                        System.out.println("Bmoquééééé");
                     }
                 }
                 System.out.println(p);
-                if (p.calculScore() >= OBJECTIF) {
-                    p.victory();
-                }
             }
-        } else if (touche.compareTo(
-                "a") == 0) {
+        } else if (touche.compareTo("a") == 0) {
             direction = UP;
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getObjectifx() >= DEBUTGRILLEX + ESPACE + TAILLE * LARGEURTUILE && list.get(i).getObjectifx() <= TAILLE * NBGRILLES * LARGEURTUILE + 2 * ESPACE + DEBUTGRILLEX) {
@@ -317,13 +302,11 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     //b = g.nouvelleCase();
                     b = p.nouvelleCasePlateau();
                     if (b == false) {
-                        p.gameOver();
+                        p.setBloque(true);
+                        System.out.println("Bmoquééééé");
                     }
                 }
                 System.out.println(p);
-                if (p.calculScore() >= OBJECTIF) {
-                    p.victory();
-                }
             }
         }
 
@@ -349,9 +332,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                             public void run() {
                                 //javaFX operations should go here
                                 for (int i = 0; i < list.size(); i++) {
-//                                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
-//                                    list.get(i).getPane().setVisible(true);
-                                    
                                     list.get(i).getImg().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
                                     list.get(i).getImg().setVisible(true);
                                 }
@@ -371,9 +351,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                             public void run() {
                                 //javaFX operations should go here
                                 for (int i = 0; i < list.size(); i++) {
-//                                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
-//                                    list.get(i).getPane().setVisible(true);
-                                    
                                     list.get(i).getImg().relocate(list.get(i).getPosx(), list.get(i).getPosy()); // on déplace la tuile d'un pixel sur la vue, on attend 5ms et on recommence jusqu'à atteindre l'objectif
                                     list.get(i).getImg().setVisible(true);
                                 }
@@ -431,15 +408,10 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
                     int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
                     list.add(new TuileGraphique(newx, newy, elem.getValeur(), fond));
-
-//                    list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
-//                    list.get(i).getPane().setVisible(true);
-//                    fond.getChildren().add(list.get(i).getPane());
-                    
                     list.get(i).getImg().relocate(list.get(i).getPosx(), list.get(i).getPosy());
                     list.get(i).getImg().setVisible(true);
                     fond.getChildren().add(list.get(i).getImg());
-                    
+
                 }
             }
             Main.joueur.setJeuEnCours(false);
@@ -451,10 +423,8 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                         int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
                         int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
                         if (list.get(j).getX() == newx && list.get(j).getY() == newy) {
-//                            list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
                             list.get(j).getImg().relocate(list.get(j).getPosx(), list.get(j).getPosy());
                         }
-//                        list.get(j).getPane().setVisible(false);
                         list.get(j).getImg().setVisible(false);
                         list.remove(j);
                     }
@@ -469,10 +439,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                 }
             }
             for (int j = 0; j < list.size(); j++) {
-//                list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
-//                list.get(j).getPane().setVisible(true);
-//                fond.getChildren().add(list.get(j).getPane());
-                
                 list.get(j).getImg().relocate(list.get(j).getPosx(), list.get(j).getPosy());
                 list.get(j).getImg().setVisible(true);
                 fond.getChildren().add(list.get(j).getImg());
@@ -482,7 +448,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             score.setText(Integer.toString(p.calculScore()));
             Main.joueur.setJeuEnCours(true);
             VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
-            
+
             //Test victoire ou défaite
             if (p.calculScore() == OBJECTIF && !hasWon) {
                 Main.mainContainer.loadScreen(Main.screenVictoryID, Main.screenVictoryFile);
@@ -495,5 +461,5 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             }
         }
     }
-    
+
 }
