@@ -2,10 +2,12 @@ package model;
 
 public class Joueur {
 
+    // Variables
     private String pseudo, motDePasse; //pseudo et mot de passe
     private int meilleurScore, nbVictoires; //le meilleur score et le nombres de victoires du joueur
     private boolean jeuEnCours; //si le joueur à actuellement une partie en cours
 
+    // Constructeur
     public Joueur(String name, String mdp) {
         this.pseudo = name;
         this.motDePasse = mdp;
@@ -47,12 +49,12 @@ public class Joueur {
     public void setMeilleurScore(int x) {
         this.meilleurScore = x;
     }
-    
+
     public void setNbvictoires(int n) {
         this.nbVictoires = n;
     }
-    
-    public void setJeuEnCours(boolean b){
+
+    public void setJeuEnCours(boolean b) {
         this.jeuEnCours = b;
     }
 

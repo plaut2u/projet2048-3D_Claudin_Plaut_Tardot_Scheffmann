@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
-public class Grille implements Parametres {
+public class Grille implements Parametres, java.io.Serializable {
 
     // Variables
     private HashSet<Case> grille;
@@ -93,6 +93,7 @@ public class Grille implements Parametres {
             if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
                 this.valeurMax = ajout.getValeur();
             }
+            //System.out.println("[DEBUG] Nouvelle "+ajout);
             return true;
         } else {
             return false;

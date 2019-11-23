@@ -1,7 +1,7 @@
 package model;
 
 public interface Parametres {
-    // CONSTANTES :
+    // CONSTANTES
 
     // Directions :
     static final int HAUT = 1;
