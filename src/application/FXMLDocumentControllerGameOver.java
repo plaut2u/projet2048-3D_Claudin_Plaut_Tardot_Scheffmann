@@ -15,13 +15,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 /**
- *
+ * Class FXMLDocumentControllerGameOver to manage GameOverScene.fxml
  * @author Gregoire
  */
 public class FXMLDocumentControllerGameOver   implements Initializable, ParametresApplication, ControlledScreen {
     
     ScreensController myController;
     
+    /**
+    * Method to set a new screen 
+    * @param screenParent the parent screen
+    * 
+    */
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
@@ -29,6 +34,12 @@ public class FXMLDocumentControllerGameOver   implements Initializable, Parametr
     @FXML
     private VBox VBoxBackground;
     
+    /**
+    * Method triggered by a button to go back to menu
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void backToMenu(MouseEvent event) throws IOException{
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -41,6 +52,12 @@ public class FXMLDocumentControllerGameOver   implements Initializable, Parametr
         myController.setScreen(Main.screenMenuID);
     }
     
+    /**
+    * Method triggered by a button to begin a new game
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void rebeginGame(MouseEvent event) throws IOException{
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -48,10 +65,17 @@ public class FXMLDocumentControllerGameOver   implements Initializable, Parametr
         
         Main.joueur.setJeuEnCours(false);
         
+        Main.mainContainer.unloadScreen(Main.screenGameID);
         Main.mainContainer.loadScreen(Main.screenGameID, Main.screenGameFile);
         myController.setScreen(Main.screenGameID);
     }
     
+    /**
+    * Method triggered by a button to quit game
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void quitGame(MouseEvent event) throws IOException{
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -60,7 +84,13 @@ public class FXMLDocumentControllerGameOver   implements Initializable, Parametr
         System.exit(0);
     }
     
-    
+    /**
+    * Method to initialize the component
+    * Add style sheet to the background
+    * 
+    * @param url the current url
+    * @param rb the ResourceBundle
+    */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

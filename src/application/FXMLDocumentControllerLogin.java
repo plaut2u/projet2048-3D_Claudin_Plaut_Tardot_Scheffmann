@@ -16,19 +16,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import model.Joueur;
 
 /**
- *
+ * Class FXMLDocumentControllerLogin to manage LoginScene.fxml
  * @author Gregoire
  */
 public class FXMLDocumentControllerLogin implements Initializable, ParametresApplication, ControlledScreen {
 
     ScreensController myController;
-
+    
+    /**
+    * Method to set a new screen 
+    * @param screenParent the parent screen
+    * 
+    */
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
@@ -57,7 +60,14 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
     @FXML
     private VBox VBoxBackground;
     
-
+    /**
+    * Method triggered by a button to try to login.
+    * We try to connect with the Data Base, 
+    * and we login or sign in the player according to his pseudo and password.
+    * @param MouseEvent event
+    * @return void
+    * @throws java.io.IOException if io-Exeption
+    */
     @FXML
     private void login(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -66,8 +76,8 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
         //Ouverture BDD
         //variables : pseudoLogIn, mdpLogIn, pseudoSignIn, mdpSignIn, mdpSignInVerif
         //cas de connexion :
-//        if () { //si le psuedo appartient deja a la bdd
-//            if () { //alors si le mdp correspond au pseudo
+//        if (true) { //si le psuedo appartient deja a la bdd
+//            if (true) { //alors si le mdp correspond au pseudo
 //                Main.joueur = new Joueur(pseudoLogIn.getText(), mdpLogIn.getText());
 //                
 //                //Main.joueur.setMeilleurScore(/*meilleur score recup de la BDD*/);
@@ -102,7 +112,16 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
         myController.setScreen(Main.screenMenuID);
 
     }
-
+    
+    /**
+    * Method which initialize the component.
+    * Set the objectifLabel to his value,
+    * Add the style sheet to the background,
+    * Play music if wanted.
+    * 
+    * @param url the current url
+    * @param rb the ResourceBundle
+    */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import model.Joueur;
 
 /**
- *
+ * Class Main of the project
  * @author Gregoire
  */
 public class Main extends Application {
@@ -40,12 +40,21 @@ public class Main extends Application {
     public static String skinMode;
     public static Joueur joueur;
     public static boolean music = false;
+    public static boolean wantToLoad = false;
     
+    /**
+    * Method which start the view.
+    * We instance some variables, open some screens, and create the primaryStage.
+    * @param primaryStage the stage used during all the game to draw our scenes 
+    * @throws java.lang.Exception if Exception
+    * @see #manageMusic(String) 
+    * 
+    */
     @Override
     public void start(Stage primaryStage) throws Exception {
         
         //Skin
-        skinMode = "noel";
+        skinMode = "default";
         cheminImg = "img/" + skinMode + "/";
         cheminSound = "sound/" + skinMode + "/";
         
@@ -76,6 +85,12 @@ public class Main extends Application {
         launch(args);
     }
     
+    /**
+    * Method to manage the music.
+    * Depending on s, we can stop the music, changed the music or create it.
+    * @param s the string we used to know what the player wants to make with the music
+    * 
+    */
     public static void manageMusic(String s){
         if(s.equals("new")){
             musicTheme = new Sound(cheminSound + "theme.wav");

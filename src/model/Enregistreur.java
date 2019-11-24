@@ -61,6 +61,28 @@ public class Enregistreur {
         }
         return null;
     }
+    
+    public static void reset(){
+        ObjectOutputStream oos = null;
+
+        try {
+            final FileOutputStream fichierOut = new FileOutputStream("sauvegarde.ser");
+            oos = new ObjectOutputStream(fichierOut);
+            oos.writeObject(null);
+            oos.flush();
+        } catch (final java.io.IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (oos != null) {
+                    oos.flush();
+                    oos.close();
+                }
+            } catch (final IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
 // FIN    
 }

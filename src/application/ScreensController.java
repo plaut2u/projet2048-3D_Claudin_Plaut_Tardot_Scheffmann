@@ -19,7 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 /**
- *
+ * Class ScreensController to control Screens displaying and loading
  * @author Gregoire
  */
 class ScreensController extends StackPane {
@@ -31,17 +31,33 @@ class ScreensController extends StackPane {
         super();
     }
 
-    //add the screen to the collection
+    /**
+    * Method to add screen to the HashMap.
+    * @param name the name of the screen we want to add
+    * @param screen the screen we want to add
+    * 
+    */
     public void addScreen(String name, Node screen) {
         screens.put(name, screen);
     }
 
-    //return the node with the appropriate name
+    /**
+    * Method to get a screen from the HashMap
+    * @param name the name of the sreen we want to get
+    * @return a Node from the HashMap
+    * 
+    */
     public Node getScreen(String name) {
         return screens.get(name);
     }
 
-    //Load the fxml File, add the screen to the screen collection and finally injects the screenPane to the controller
+    /**
+    * Method to load a screen.
+    * Load the fxml File, add the screen to the screen collection and finally injects the screenPane to the controller
+    * @param name the name of the screen we want to load
+    * @param resource the resource of the screen we want to load
+    * @return if success
+    */
     public boolean loadScreen(String name, String resource) {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource));
@@ -56,10 +72,16 @@ class ScreensController extends StackPane {
         }
     }
 
-    //This method tries to displayed the screen with a predefined name.
-    //First it makes sure the screen has been already loaded.  Then if there is more than
-    //one screen the new screen is been added second, and then the current screen is removed.
-    // If there isn't any screen being displayed, the new screen is just added to the root.
+    /**
+    * Method to display a screen.
+    * This method tries to displayed the screen with a predefined name.
+    * First it makes sure the screen has been already loaded.  Then if there is more than
+    * one screen the new screen is been added second, and then the current screen is removed.
+    * If there isn't any screen being displayed, the new screen is just added to the root.
+    * 
+    * @param name the name of the screen we want to display
+    * @return if success
+    */
     public boolean setScreen(final String name) {
         if (screens.get(name) != null) {   //screen loaded
             final DoubleProperty opacity = opacityProperty();
@@ -95,7 +117,13 @@ class ScreensController extends StackPane {
         }
     }
     
-    //This method will remove the screen with the given name from the collection of screens
+    /**
+    * Method to unload a screen.
+    * This method will remove the screen with the given name from the collection of screens
+    * 
+    * @param name the name of the screen we want to unload
+    * @return if success
+    */
     public boolean unloadScreen(String name) {
         if (screens.remove(name) == null) {
             System.out.println("Screen didn't exist");

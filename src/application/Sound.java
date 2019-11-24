@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.sound.sampled.*;
 
 /**
- *
+ * Class Sound, used to play sounds.
  * @author Gregoire
  */
 public class Sound extends Thread{
@@ -21,9 +21,12 @@ public class Sound extends Thread{
     public Sound(String n){
         this.nomFichier = n;
     }
-     
     
-     
+    /**
+    * Method to run a sound.
+    * 
+    * 
+    */
     public void run(){
         File fichier = new File(this.nomFichier);
         try {

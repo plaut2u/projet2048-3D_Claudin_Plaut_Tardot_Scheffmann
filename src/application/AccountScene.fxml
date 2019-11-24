@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -10,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentControllerAccount">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentControllerAccount">
    <children>
-      <VBox alignment="CENTER" prefHeight="616.0" prefWidth="800.0" styleClass="background">
+      <VBox alignment="CENTER" prefHeight="678.0" prefWidth="854.0" styleClass="background">
          <children>
             <Label alignment="CENTER" styleClass="text" text="Mon Compte" textFill="#ffae00">
                <font>
@@ -209,6 +210,26 @@
                            </HBox.margin>
                         </Label>
                         <PasswordField fx:id="confirmNewPassword" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="790.0">
+                     <children>
+                        <Label styleClass="text" text="Supprimer la dernière partie sauvegardée : " textFill="#ffae00">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="100.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <CheckBox fx:id="resetCheckBox" mnemonicParsing="false" styleClass="text" text="Oui" textFill="#ffae00">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </CheckBox>
                      </children>
                   </HBox>
                </children>

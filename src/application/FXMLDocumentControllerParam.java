@@ -12,7 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -20,16 +19,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
- *
+ * Class FXMLDocumentControllerParam to manage ParametersScene.fxml
  * @author Gregoire
  */
-public class FXMLDocumentControllerParam implements Initializable, ParametresApplication, ControlledScreen{
-    
-    ScreensController myController;
-    
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
-    }
+public class FXMLDocumentControllerParam implements Initializable, ParametresApplication{
     
     private boolean tempMusic;
     private String tempStyle;
@@ -46,13 +39,26 @@ public class FXMLDocumentControllerParam implements Initializable, ParametresApp
     
     @FXML
     private Button cancelButton;
-
+    
+    /**
+    * Method triggered by a button to activate or desactivate the music
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void musicChange(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
     }
-
+    
+    /**
+    * Method triggered by a button to save changes and close the window.
+    * Change the style or/and the music activation.
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void ok(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -81,7 +87,13 @@ public class FXMLDocumentControllerParam implements Initializable, ParametresApp
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
     }
-
+    
+    /**
+    * Method triggered by a button to cancel changes and close the window
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void cancel(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -91,7 +103,13 @@ public class FXMLDocumentControllerParam implements Initializable, ParametresApp
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-
+    
+    /**
+    * Method which initialize the component.
+    * @param url the current url 
+    * @param rb the ResourceBundle
+    * 
+    */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

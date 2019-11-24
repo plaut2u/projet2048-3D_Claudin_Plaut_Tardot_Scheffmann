@@ -6,10 +6,13 @@
 package application;
 
 /**
- *
+ * Interface ControlledScreen to use ScreensController
  * @author Gregoire
  */
 public interface ControlledScreen {
-    
+    /**
+    * Method to set the screen Parent of current screen.
+    * @param screenPage the current screen
+    */
     public void setScreenParent(ScreensController screenPage);
 }

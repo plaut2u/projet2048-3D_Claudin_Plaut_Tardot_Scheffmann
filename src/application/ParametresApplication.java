@@ -1,10 +1,7 @@
 package application;
 
-import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-
-/*
+/**
+ * Interface ParametresApplication to manage constants
  * @author William
  */
 public interface ParametresApplication {
@@ -25,7 +22,7 @@ public interface ParametresApplication {
     static final int NBGRILLES = 3;
 
     // Objectif :
-    static final int OBJECTIF = 32;
+    static final int OBJECTIF = 2048;
     
     //Graphique
     static final int HAUTEURTUILE = 97;

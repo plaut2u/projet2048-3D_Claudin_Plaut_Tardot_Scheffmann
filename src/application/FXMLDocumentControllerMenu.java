@@ -21,15 +21,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Enregistreur;
 
 /**
- *
+ * Class FXMLDocumentControllerMenu to manage MenuScene.fxml
  * @author Gregoire
  */
 public class FXMLDocumentControllerMenu implements Initializable, ParametresApplication, ControlledScreen {
     
     ScreensController myController;
     
+    /**
+    * Method to set a new screen 
+    * @param screenParent the parent screen
+    * 
+    */
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
@@ -39,6 +45,9 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
     
     @FXML
     private Button newGameButton;
+    
+    @FXML
+    private Button loadGameButton;
     
     @FXML
     private Button continueGameButton;
@@ -56,16 +65,33 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
     private ImageView imgRight;
     
     @FXML
+    private Label noSaveLabel;
+    
+    /**
+    * Method triggered by a button to set visible other buttons
+    * @param MouseEvent event
+    * @return void
+    * @throws java.io.IOException if io-Exception
+    */
+    @FXML
     private void soloGame(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
         
         newGameButton.setVisible(true);
+        loadGameButton.setVisible(true);
         if(Main.joueur.getJeuEnCours()){
             continueGameButton.setVisible(true);
         }
     }
     
+    /**
+    * Method triggered by a button to continue last game
+    * @param MouseEvent event
+    * @return void
+    * @throws java.io.IOException if io-Exception
+    * 
+    */
     @FXML
     private void continueGame(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -74,6 +100,37 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
         myController.setScreen(Main.screenGameID);
     }
     
+    /**
+    * Method triggered by a button to try to load a saved game
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
+    @FXML
+    private void loadGame(MouseEvent event) throws IOException {
+        Sound buttonClicked = new Sound("sound\\" + "button.wav");
+        buttonClicked.start();
+        
+        //load partie
+        if(Enregistreur.deserialiser() != null){
+            Main.wantToLoad = true;
+            System.out.println(Enregistreur.deserialiser());
+            Main.joueur.setJeuEnCours(true);
+        
+            Main.mainContainer.loadScreen(Main.screenGameID, Main.screenGameFile);
+            myController.setScreen(Main.screenGameID);
+        }else{
+            Main.wantToLoad = false;
+            noSaveLabel.setVisible(true);
+        }
+    }
+    
+    /**
+    * Method triggered by a button to begin a new game
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void beginGame(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -85,6 +142,12 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
         myController.setScreen(Main.screenGameID);
     }
     
+    /**
+    * Method triggered by a button to disconnect and go back to login menu
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void disconnect(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -94,6 +157,12 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
         myController.setScreen(Main.screenLoginID);
     }
     
+    /**
+    * Method triggered by a button to open the account window
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void goToAccount(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -105,9 +174,17 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
 
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setTitle("Mon Compte");
+        stage.getIcons().add(new Image("img/avatar.png"));
         stage.show();
     }
     
+    /**
+    * Method triggered by a button to open the param window
+    * @param MouseEvent event
+    * @return void
+    * 
+    */
     @FXML
     private void goToParam(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -118,10 +195,21 @@ public class FXMLDocumentControllerMenu implements Initializable, ParametresAppl
         boolean add = scene.getStylesheets().add("css/" + skinMode + ".css");
 
         Stage stage = new Stage();
+        stage.getIcons().add(new Image("img/param.png"));
+        stage.setTitle("Paramètres");
         stage.setScene(scene);
         stage.show();
     }
-
+    
+    /**
+    * Method which initialize the component.
+    * Set images on the pane,
+    * Add style sheet to the background,
+    * Set pseudo to the menu bar.
+    * 
+    * @param url the current url
+    * @param rb the RescourceBundle
+    */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
