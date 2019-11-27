@@ -83,8 +83,8 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
             requete = "SELECT * FROM Password WHERE mdpLogIn.getText() = mdp";
             if (requete == "") {
                 Main.joueur = new Joueur(pseudoLogIn.getText(), mdpLogIn.getText());
-                Main.joueur.setMeilleurScore(SELECT * FROM HighScore WHERE Login = pseudoLogIn.getText() AND Password = mdpLogIn.getText() );
-                Main.joueur.setNbvictoires(SELECT * FROM NbVictoires WHERE Login = pseudoLogIn.getText() AND Password = mdpLogIn.getText() );
+                //Main.joueur.setMeilleurScore(SELECT * FROM HighScore WHERE Login = pseudoLogIn.getText() AND Password = mdpLogIn.getText() );
+                //Main.joueur.setNbvictoires(SELECT * FROM NbVictoires WHERE Login = pseudoLogIn.getText() AND Password = mdpLogIn.getText() );
                 Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
                 myController.setScreen(Main.screenMenuID);
             } else {
@@ -106,7 +106,7 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
             Main.joueur = new Joueur(pseudoSignIn.getText(), mdpSignIn.getText());
             Main.joueur.setMeilleurScore(0);
             Main.joueur.setNbvictoires(0);
-            requete = "INSERT INTO (nomBase) VALUES(pseudoSignIn.getText(), mdpSignIn.getText(),0,0)"
+            requete = "INSERT INTO (nomBase) VALUES(pseudoSignIn.getText(), mdpSignIn.getText(),0,0)";
             Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
             myController.setScreen(Main.screenMenuID);
 
