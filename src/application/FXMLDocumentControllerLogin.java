@@ -75,6 +75,43 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
 
         //Ouverture BDD
         //variables : pseudoLogIn, mdpLogIn, pseudoSignIn, mdpSignIn, mdpSignInVerif
+        String requete = "";
+        requete = "SELECT * FROM Login WHERE pseudoLogIn.getText() = login";
+        if ("".equals(requete)) {
+            System.out.println("Ce pseudo n'est pas attribué, inscrivez-vous pour pouvoir jouer");
+        } else {
+            requete = "SELECT * FROM Password WHERE mdpLogIn.getText() = mdp";
+            if (requete == "") {
+                Main.joueur = new Joueur(pseudoLogIn.getText(), mdpLogIn.getText());
+                Main.joueur.setMeilleurScore(SELECT * FROM HighScore WHERE Login = pseudoLogIn.getText() AND Password = mdpLogIn.getText() );
+                Main.joueur.setNbvictoires(SELECT * FROM NbVictoires WHERE Login = pseudoLogIn.getText() AND Password = mdpLogIn.getText() );
+                Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
+                myController.setScreen(Main.screenMenuID);
+            } else {
+                System.out.println("azy t'es sérieux tu te souviens plus de ton mot de passe");
+            }
+
+        }
+        requete = "SELECT * FROM Login WHERE pseudoSignIn.getText() = Login";
+
+        if (requete != "") {
+            System.out.println("Ce pseudo est déjà attribué");
+        } else if (pseudoSignIn.getText() == null) {
+            System.out.println("Veuillez entre un pseudo");
+        } else if (mdpSignIn.getText() == null) {
+            System.out.println("Veuillez mettre un mot de passe");
+        } else if (mdpSignIn.getText() != mdpSignInVerif.getText()) {
+            System.out.println("Veuillez deux mots de passe identitiques");
+        } else {
+            Main.joueur = new Joueur(pseudoSignIn.getText(), mdpSignIn.getText());
+            Main.joueur.setMeilleurScore(0);
+            Main.joueur.setNbvictoires(0);
+            requete = "INSERT INTO (nomBase) VALUES(pseudoSignIn.getText(), mdpSignIn.getText(),0,0)"
+            Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
+            myController.setScreen(Main.screenMenuID);
+
+        }
+
         //cas de connexion :
 //        if (true) { //si le psuedo appartient deja a la bdd
 //            if (true) { //alors si le mdp correspond au pseudo
