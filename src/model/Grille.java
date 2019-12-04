@@ -1,11 +1,15 @@
 package model;
 
-// Bibliothèques
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
+/**
+ * Contient les variables, le constructeur et les méthodes relatifs à une Grille.
+ *
+ * @author William
+ */
 public class Grille implements Parametres, java.io.Serializable {
 
     // Variables
@@ -48,7 +52,15 @@ public class Grille implements Parametres, java.io.Serializable {
     }
 
     // METHODES :
-    // Représentation textuelle d'une grille
+    /**
+     * Représentation d'une grille dans la console.
+     * <br>Exemple :
+     * <br>[0, 2, 0]
+     * <br>[4, 8, 16]
+     * <br>[0, 0, 2048]
+     * 
+     * @return String affichage de la grille
+     */
     @Override
     public String toString() {
         int[][] tableau = new int[TAILLE][TAILLE];
@@ -62,7 +74,9 @@ public class Grille implements Parametres, java.io.Serializable {
         return result;
     }
 
-    // Supprimer les cases donc la valeur vaut 0
+    /**
+     * Supprime les cases donc la valeur vaut 0.
+     */
     public void clean() {
         for (Case c : this.grille) {
             if (c.getValeur() == 0) {
@@ -71,7 +85,11 @@ public class Grille implements Parametres, java.io.Serializable {
         }
     }
 
-    // Création d'une nouvelle case, à condition qu'il reste au moins un emplacement vide dans la grille
+    /**
+     * Création d'une nouvelle case, à condition qu'il reste au moins un emplacement vide dans la grille.
+     * 
+     * @return boolean Renvoie VRAI si on a réussi à créer une nouvelle case, FAUX sinon
+     */
     public boolean nouvelleCase() {
         if (this.grille.size() < TAILLE * TAILLE) {
             ArrayList<Case> casesLibres = new ArrayList<>();
@@ -93,14 +111,17 @@ public class Grille implements Parametres, java.io.Serializable {
             if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
                 this.valeurMax = ajout.getValeur();
             }
-            //System.out.println("[DEBUG] Nouvelle "+ajout);
             return true;
         } else {
             return false;
         }
     }
 
-    // Retourne VRAI si des mouvements sont encore possibles sur la grille, retourne FAUX sinon
+    /**
+     * Vérifie si des mouvements sont encore possible sur la grille.
+     * 
+     * @return boolean Retourne VRAI si des mouvements sont encore possibles, FAUX sinon
+     */
     public boolean checkMoves() {
         if (this.grille.size() < TAILLE * TAILLE) {
             return true;
@@ -119,7 +140,11 @@ public class Grille implements Parametres, java.io.Serializable {
     }
 
     // DEPLACEMENTS DES CASES :
-    // Multiplie la valeur de la case par 2
+    /**
+     * Multiplie la valeur de la case par 2.
+     * 
+     * @param c Case qui va voir sa valeur doublée
+     */
     private void fusion(Case c) {
         c.setValeur(c.getValeur() * 2);
         if (this.valeurMax < c.getValeur()) {
@@ -128,13 +153,17 @@ public class Grille implements Parametres, java.io.Serializable {
         deplacement = true;
     }
 
-    /* Retourne les 3 cases les plus proches de la direction choisie
-    * Si direction = HAUT : retourne les 3 cases qui sont le plus en haut (une pour chaque colonne)
-    * Si direction = DROITE : retourne les 3 cases qui sont le plus à droite (une pour chaque ligne)
-    * Si direction = BAS : retourne les 3 cases qui sont le plus en bas (une pour chaque colonne)
-    * Si direction = GAUCHE : retourne les 3 cases qui sont le plus à gauche (une pour chaque ligne)
-    * Attention : le tableau retourné peut contenir des null si les lignes/colonnes sont vides
-     */
+    /**
+    * Retourne les 3 cases les plus proches de la direction choisie :
+    * <br>- si direction = HAUT : retourne les 3 cases qui sont le plus en haut (une pour chaque colonne)
+    * <br>- si direction = DROITE : retourne les 3 cases qui sont le plus à droite (une pour chaque ligne)
+    * <br>- si direction = BAS : retourne les 3 cases qui sont le plus en bas (une pour chaque colonne)
+    * <br>- si direction = GAUCHE : retourne les 3 cases qui sont le plus à gauche (une pour chaque ligne)
+    * <br>Attention : le tableau retourné peut contenir des null si les lignes/colonnes sont vides.
+    * 
+    * @param direction Direction dans laquelle on veut obtenir l'extrémité de la grille
+    * @return Case[] Tableau de cases qui correspondent à un bord de la grille à l'extrémité de la direction donnée
+    */
     public Case[] getCasesExtremites(int direction) {
         Case[] result = new Case[TAILLE];
         for (Case c : this.grille) {
@@ -163,9 +192,13 @@ public class Grille implements Parametres, java.io.Serializable {
         }
         return result;
     }
-
-    // Déplace les cases dans la direction donnée
-    // Retourner VRAI si  au moins une case a bougé, retourne FAUX sinon
+    
+    /**
+     * Déplace les cases dans la direction donnée.
+     * 
+     * @param direction Direction dans laquelle on veut déplacer les cases de la grille
+     * @return boolean Retourner VRAI si au moins une case a bougé, FAUX sinon
+     */
     public boolean lanceurDeplacerCases(int direction) {
         Case[] extremites = this.getCasesExtremites(direction);
         deplacement = false; // pour vérifier si on a bougé au moins une case après le déplacement, avant d'en rajouter une nouvelle
@@ -188,9 +221,15 @@ public class Grille implements Parametres, java.io.Serializable {
         return deplacement;
     }
 
-    /* Déplace les cases les plus proches de la direction donnée
-    * puis on déplace les cases voisines (en fusionnant si nécessaire)
-    * et ainsi de suite jusqu'à ce qu'on n'ai plus de voisins à déplacer
+    /**
+     * Déplace les cases les plus proches de la direction donnée,
+     * puis on déplace les cases voisines (en fusionnant si nécessaire),
+     * et ainsi de suite jusqu'à ce qu'on n'ai plus de voisins à déplacer.
+     * 
+     * @param extremites Tableau de cases à l'extrémité d'une grille dans une direction donnée
+     * @param rangee Numérique qui permet de sélectionner une case à déplacer
+     * @param direction Direction dans laquelle on déplace les cases de la grille
+     * @param compteur Compteur qu'on incrémente pour la récursivité
      */
     private void deplacerCasesRecursif(Case[] extremites, int rangee, int direction, int compteur) {
         if (extremites[rangee] != null) {

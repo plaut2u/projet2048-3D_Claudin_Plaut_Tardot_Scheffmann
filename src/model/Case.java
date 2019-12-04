@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Contient les variables, le constructeur et les méthodes relatifs à une Case.
+ * 
+ * @author William
+ */
 public class Case implements Parametres, java.io.Serializable {
 
     // Variables
@@ -42,25 +47,38 @@ public class Case implements Parametres, java.io.Serializable {
     }
 
     // METHODES :
-    // Représentation textuelle d'une case
+    /**
+     * Représentation d'une case dans la console.
+     * <br>Exemple : Case [X:0][Y:2]{Grille:1}(Valeur:2048)
+     * 
+     * @return String affichage de la case
+     */
     @Override
     public String toString() {
         return "Case [X:" + this.x + "][Y:" + this.y + "]{Grille:"+this.getGrille().getNumero()+"}(Valeur:" + this.valeur + ").";
     }
 
-    // Détermination du code de la case
+    /**
+     * Détermination du code de la case. Chaque case d'une grille à un code unique.
+     * <br>Exemple : code de la case (2,1) = 27
+     * 
+     * @return int hashcode de la case
+     */
     @Override
-    public int hashCode() { // détermine le hashcode
+    public int hashCode() {
         if(this.grille != null){
             return this.x * 7 + this.y * 13 + this.grille.getNumero()*41;
         }else{
             return this.x * 7 + this.y * 13;
         }
-        // exemple : code de la case (2,1) = 27
-        // chaque case d'une grille à un code unique
     }
     
-    // Vérifie si une case est égale à un objet passé en paramètre
+    /**
+     * Vérifie si une case est égale à un objet passé en paramètre.
+     * 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
         // on vérifie si l'objet en paramètre est bien une case
@@ -73,7 +91,12 @@ public class Case implements Parametres, java.io.Serializable {
         }
     }
     
-    // Retourne VRAI si la case en paramètre a la même valeur que la case courante, retourne FAUX sinon
+    /**
+     * Retourne VRAI si la case en paramètre a la même valeur que la case courante, FAUX sinon.
+     * 
+     * @param c     La case avec laquelle on compare la case courante.
+     * @return boolean Retourne VRAI si la valeur est égale, FAUX sinon.
+     */
     public boolean valeurEgale(Case c) {
         // on vérifie si la case en paramètre n'est pas nulle
         if (c != null) {
@@ -84,7 +107,12 @@ public class Case implements Parametres, java.io.Serializable {
         }
     }
     
-    // Retourne la première case rencontrée dans une direction donnée en partant de la case courante
+    /**
+     * Retourne la première case rencontrée dans une direction donnée en partant de la case courante.
+     * 
+     * @param direction Direction dans laquelle on regarde si la case a un voisin
+     * @return Case La case voisine à la case courante si elle existe, null sinon
+     */
     public Case getVoisinDirect(int direction) {
         if (direction == HAUT) {
             for (int i = this.y - 1; i >= 0; i--) {

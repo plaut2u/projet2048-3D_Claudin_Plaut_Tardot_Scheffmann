@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Contient les constantes nécessaires à l'exécution du jeu.
+ *
+ * @author William
+ */
 public interface Parametres {
     // CONSTANTES
 
@@ -13,7 +18,7 @@ public interface Parametres {
 
     // Taille de la grille :
     static final int TAILLE = 3;
-    
+
     // Nombre de grilles dans le plateau :
     static final int NBGRILLES = 3;
 

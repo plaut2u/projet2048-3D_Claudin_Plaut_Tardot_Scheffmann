@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Contient les variables, le constructeur et les méthodes relatifs à un Joueur.
+ *
+ * @author Tom
+ */
 public class Joueur {
 
     // Variables

@@ -6,12 +6,23 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Classe qui contient les fonctions qui permettent de sauvegarder et de charger
+ * une partie.
+ *
+ * @author William
+ */
 public class Enregistreur {
 
-    // Sauvegarde le Plateau de Jeu dans le fichier "plateau.ser"
+    /**
+     * Permet de sauvegarder le plateau de jeu dans le fichier "sauvegarde.ser".
+     *
+     * @param p Plateau sur lequel on joue et que l'on veut sauvegarder
+     */
     public static void serialiser(Plateau p) {
         // Création d'un nouveau plateau (copie du plateau du jeu en cours)
         final Plateau save = new Plateau();
+        // Copie du plateau entré en paramètre
         save.setPlateau(p.getPlateau());
         save.setBloque(p.getBloque());
         save.setScore(p.getScore());
@@ -37,7 +48,11 @@ public class Enregistreur {
         }
     }
 
-    // Permet de charger le plateau de jeu et de reprendre la partie là où on l'avait sauvegardé
+    /**
+     * Récupère le fichier "sauvegarde.ser" pour charger la partie là où on l'avait sauvegardé.
+     * 
+     * @return Plateau si "sauvegarde.ser" contient un plateau sauvegardé, null sinon
+     */
     public static Plateau deserialiser() {
         ObjectInputStream ois = null;
 
@@ -47,9 +62,9 @@ public class Enregistreur {
             final Plateau save = (Plateau) ois.readObject();
             return save;
         } catch (final java.io.IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (final ClassNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             try {
                 if (ois != null) {
@@ -61,8 +76,11 @@ public class Enregistreur {
         }
         return null;
     }
-    
-    public static void reset(){
+
+    /**
+     * Vide tout le contenu du fichier "sauvegarde.ser".
+     */
+    public static void reset() {
         ObjectOutputStream oos = null;
 
         try {
