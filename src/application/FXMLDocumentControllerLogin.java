@@ -8,9 +8,12 @@ package application;
 import static application.Main.skinMode;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,24 +24,26 @@ import model.Joueur;
 
 /**
  * Class FXMLDocumentControllerLogin to manage LoginScene.fxml
+ *
  * @author Gregoire
  */
 public class FXMLDocumentControllerLogin implements Initializable, ParametresApplication, ControlledScreen {
 
     ScreensController myController;
-    
+
     /**
-    * Method to set a new screen 
-    * @param screenParent the parent screen
-    * 
-    */
+     * Method to set a new screen
+     *
+     * @param screenParent the parent screen
+     *
+     */
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
-    
+
     @FXML
     private ImageView titleImg;
-    
+
     @FXML
     private ImageView loginImg;
 
@@ -47,118 +52,163 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
 
     @FXML
     private PasswordField mdpLogIn;
-    
+
     @FXML
     private TextField pseudoSignIn;
-    
+
     @FXML
     private PasswordField mdpSignIn;
-    
+
     @FXML
     private PasswordField mdpSignInVerif;
-    
+
+    @FXML
+    private Label LogInError;
+
+    @FXML
+    private Label SignInError;
+
     @FXML
     private VBox VBoxBackground;
-    
+
     /**
-    * Method triggered by a button to try to login.
-    * We try to connect with the Data Base, 
-    * and we login or sign in the player according to his pseudo and password.
-    * @param MouseEvent event
-    * @return void
-    * @throws java.io.IOException if io-Exeption
-    */
+     * Method triggered by a button to try to login. We try to connect with the
+     * Data Base, and we login or sign in the player according to his pseudo and
+     * password.
+     *
+     * @param MouseEvent event
+     * @return void
+     * @throws java.io.IOException if io-Exeption
+     */
     @FXML
-    private void login(MouseEvent event) throws IOException {
+    private void login(MouseEvent event) throws IOException, SQLException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
 
+        boolean success = false;
+
         //Ouverture BDD
-        //variables : pseudoLogIn, mdpLogIn, pseudoSignIn, mdpSignIn, mdpSignInVerif
-        String requete = "";
-        requete = "SELECT * FROM Login WHERE pseudoLogIn.getText() = login";
-        if ("".equals(requete)) {
-            System.out.println("Ce pseudo n'est pas attribué, inscrivez-vous pour pouvoir jouer");
-        } else {
-            requete = "SELECT * FROM Password WHERE mdpLogIn.getText() = mdp";
-            if (requete == "") {
-                Main.joueur = new Joueur(pseudoLogIn.getText(), mdpLogIn.getText());
-                //Main.joueur.setMeilleurScore(SELECT * FROM HighScore WHERE Login = pseudoLogIn.getText() AND Password = mdpLogIn.getText() );
-                //Main.joueur.setNbvictoires(SELECT * FROM NbVictoires WHERE Login = pseudoLogIn.getText() AND Password = mdpLogIn.getText() );
-                Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
-                myController.setScreen(Main.screenMenuID);
-            } else {
-                System.out.println("azy t'es sérieux tu te souviens plus de ton mot de passe");
+        /* Connexion à la base de données */
+        /* Chargement du driver JDBC pour MySQL */
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            /* Gérer les éventuelles erreurs ici. */
+        }
+
+        String host = "mysql-2048user.alwaysdata.net";
+        String port = "3306";
+        String database = "2048user_bdd2048";
+        String utilisateur = "2048user";
+        String motDePasse = "AirForce2048";
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + database;
+        Connection connexion = null;
+        try {
+            connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+            Statement statement = connexion.createStatement();
+
+            if (pseudoLogIn.getText().equals("") && !pseudoSignIn.getText().equals("") && !mdpSignIn.getText().equals("")) { //cas d'inscription
+                String requete = "";
+                requete = "SELECT Pseudo FROM Projet2048";
+                ResultSet rs = statement.executeQuery(requete);
+                ArrayList<String> list = new ArrayList<>();
+                while (rs.next()) {
+                    list.add(rs.getString("Pseudo"));
+                }
+                if (list.contains(pseudoSignIn.getText())) {
+                    //pseudo déjà utilisé
+                    SignInError.setText("Ce pseudo est déjà utilisé");
+                    SignInError.setVisible(true);
+                } else {
+                    //inscription réussite
+                    if (mdpSignIn.getText().equals(mdpSignInVerif.getText())) {
+                        requete = "INSERT INTO Projet2048 VALUES('" + pseudoSignIn.getText() + "','" + mdpSignIn.getText() + "',0,0)";
+                        Main.joueur = new Joueur(pseudoSignIn.getText(), mdpSignIn.getText());
+
+                        success = true;
+
+                    } else {
+                        //mot de passe différents
+                        SignInError.setText("Les deux mots de passes sont différents");
+                        SignInError.setVisible(true);
+                    }
+                }
+            } else if (!pseudoLogIn.getText().equals("") && pseudoSignIn.getText().equals("")) { //cas de connexion
+                String requete = "";
+                requete = "SELECT Pseudo, Password FROM Projet2048";
+                ResultSet rs = statement.executeQuery(requete);
+                ArrayList<String> listPseudo = new ArrayList<>();
+                ArrayList<String> listPassword = new ArrayList<>();
+                while (rs.next()) {
+                    listPseudo.add(rs.getString("Pseudo"));
+                    listPassword.add(rs.getString("Password"));
+                }
+                if (listPseudo.contains(pseudoLogIn.getText())) {
+                    //deja un compte créé
+                    int index = listPseudo.indexOf(pseudoLogIn.getText());
+                    if (listPassword.get(index).equals(mdpLogIn.getText())) {
+                        //connexion réussite
+                        Statement statement2 = connexion.createStatement();
+                        requete = "SELECT NbVictory, BestScore, Pseudo FROM Projet2048 ";
+                        ResultSet rs2 = statement2.executeQuery(requete);
+                        ArrayList<String> listNbVictory = new ArrayList<>();
+                        ArrayList<String> listBestScore = new ArrayList<>();
+                        while (rs2.next()) {
+                            listNbVictory.add(rs2.getString("NbVictory"));
+                            listBestScore.add(rs2.getString("BestScore"));
+                            listPseudo.add(rs2.getString("Pseudo"));
+                        }
+                        
+                        int index2 = listPseudo.indexOf(pseudoLogIn.getText());
+
+                        String nbVic = listNbVictory.get(index2);
+                        String bestScore = listBestScore.get(index2);
+
+                        Main.joueur = new Joueur(pseudoLogIn.getText(), mdpLogIn.getText());
+                        Main.joueur.setMeilleurScore(Integer.parseInt(bestScore));
+                        Main.joueur.setNbvictoires(Integer.parseInt(nbVic));
+                        
+                        success = true;
+
+                    } else {
+                        //pas bon mot de passe
+                        LogInError.setText("Mot de passe incorrect");
+                        LogInError.setVisible(true);
+                    }
+                } else {
+                    //Le compte n'est pas créé
+                    LogInError.setText("Le compte n'est pas créé, inscrivez-vous");
+                    LogInError.setVisible(true);
+                }
             }
 
-        }
-        requete = "SELECT * FROM Login WHERE pseudoSignIn.getText() = Login";
+        } catch (SQLException e) {
+            /* Gérer les éventuelles erreurs ici */
 
-        if (requete != "") {
-            System.out.println("Ce pseudo est déjà attribué");
-        } else if (pseudoSignIn.getText() == null) {
-            System.out.println("Veuillez entre un pseudo");
-        } else if (mdpSignIn.getText() == null) {
-            System.out.println("Veuillez mettre un mot de passe");
-        } else if (mdpSignIn.getText() != mdpSignInVerif.getText()) {
-            System.out.println("Veuillez deux mots de passe identitiques");
-        } else {
-            Main.joueur = new Joueur(pseudoSignIn.getText(), mdpSignIn.getText());
-            Main.joueur.setMeilleurScore(0);
-            Main.joueur.setNbvictoires(0);
-            requete = "INSERT INTO (nomBase) VALUES(pseudoSignIn.getText(), mdpSignIn.getText(),0,0)";
+        } finally {
+            if (connexion != null) {
+                try {
+                    /* Fermeture de la connexion */
+                    connexion.close();
+                } catch (SQLException ignore) {
+                    /* Si une erreur survient lors de la fermeture, il suffit de l'ignorer. */
+                }
+            }
+        }
+
+        if (success) {
             Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
             myController.setScreen(Main.screenMenuID);
-
         }
-
-        //cas de connexion :
-//        if (true) { //si le psuedo appartient deja a la bdd
-//            if (true) { //alors si le mdp correspond au pseudo
-//                Main.joueur = new Joueur(pseudoLogIn.getText(), mdpLogIn.getText());
-//                
-//                //Main.joueur.setMeilleurScore(/*meilleur score recup de la BDD*/);
-//                //Main.joueur.setNbvictoires(/*nb victoire de la bdd*/);
-//                
-//                Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
-//                myController.setScreen(Main.screenMenuID);
-//            } else{ //sinon si le mdp est mauvais
-//                //message d'erreur et c'est tout
-//            }
-//        } else if(){ //sinon si le pseudo n'appartient pas et n'est pas null
-//            //message d'erruer et c'est tout
-//        }
-        // cas d'inscription
-//        if () { //si le pseudo voulu est déjà utilisé
-//            //message d'erreur 
-//        } else if(){ //sinon si not null
-//            if(){ //si mot de passe et confirm mot de passe égaux et mot de passe 1 not null
-//                //ça marche, on créé une nouvelle ligne dans la bdd
-////                Main.joueur = new Joueur(pseudoLogIn.getText(), mdpLogIn.getText());
-////                
-////                Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
-////                myController.setScreen(Main.screenMenuID);
-//            } else if(){ //si mdp différent et not null
-//                //message d'erreur 
-//            }
-//        }
-
-        Main.joueur = new Joueur(pseudoLogIn.getText(), mdpLogIn.getText());
-
-        Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
-        myController.setScreen(Main.screenMenuID);
-
     }
-    
+
     /**
-    * Method which initialize the component.
-    * Set the objectifLabel to his value,
-    * Add the style sheet to the background,
-    * Play music if wanted.
-    * 
-    * @param url the current url
-    * @param rb the ResourceBundle
-    */
+     * Method which initialize the component. Set the objectifLabel to his
+     * value, Add the style sheet to the background, Play music if wanted.
+     *
+     * @param url the current url
+     * @param rb the ResourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

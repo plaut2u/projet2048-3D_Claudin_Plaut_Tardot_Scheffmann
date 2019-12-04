@@ -32,17 +32,19 @@ import model.Plateau;
 
 /**
  * Class FXMLDocumentController to manage GameScene.fxml
+ *
  * @author Gregoire
  */
 public class FXMLDocumentController implements Initializable, ParametresApplication, ControlledScreen {
 
     ScreensController myController;
-    
+
     /**
-    * Method to set a new screen 
-    * @param screenParent the parent screen
-    * 
-    */
+     * Method to set a new screen
+     *
+     * @param screenParent the parent screen
+     *
+     */
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
@@ -68,13 +70,14 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
     boolean b = p.nouvelleCasePlateau();
     int direction;
     boolean hasWon = false;
-    
+
     /**
-    * Method triggered by a button to begin a new game
-    * @param MouseEvent event
-    * @return void
-    * 
-    */
+     * Method triggered by a button to begin a new game
+     *
+     * @param MouseEvent event
+     * @return void
+     *
+     */
     @FXML
     private void rebeginGame(MouseEvent event) {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -119,39 +122,42 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             }
         }
     }
-    
+
     /**
-    * Method triggered by a button to save current game
-    * @param MouseEvent event
-    * @return void
-    * 
-    */
+     * Method triggered by a button to save current game
+     *
+     * @param MouseEvent event
+     * @return void
+     *
+     */
     @FXML
     private void saveGame(MouseEvent event) {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
         Enregistreur.serialiser(p);
     }
-    
+
     /**
-    * Method triggered by a button to quit game
-    * @param MouseEvent event
-    * @return void
-    * 
-    */
+     * Method triggered by a button to quit game
+     *
+     * @param MouseEvent event
+     * @return void
+     *
+     */
     @FXML
     private void quitGame(MouseEvent event) {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
         System.exit(0);
     }
-    
+
     /**
-    * Method triggered by a button to disconnect and go back to login menu
-    * @param MouseEvent event
-    * @return void
-    * 
-    */
+     * Method triggered by a button to disconnect and go back to login menu
+     *
+     * @param MouseEvent event
+     * @return void
+     *
+     */
     @FXML
     private void disconnect(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -160,13 +166,14 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         Main.mainContainer.loadScreen(Main.screenLoginID, Main.screenLoginFile);
         myController.setScreen(Main.screenLoginID);
     }
-    
+
     /**
-    * Method triggered by a button to open the account window
-    * @param MouseEvent event
-    * @return void
-    * 
-    */
+     * Method triggered by a button to open the account window
+     *
+     * @param MouseEvent event
+     * @return void
+     *
+     */
     @FXML
     private void goToAccount(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -182,13 +189,14 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         stage.setTitle("Mon Compte");
         stage.show();
     }
-    
+
     /**
-    * Method triggered by a button to open the param window
-    * @param MouseEvent event
-    * @return void
-    * 
-    */
+     * Method triggered by a button to open the param window
+     *
+     * @param MouseEvent event
+     * @return void
+     *
+     */
     @FXML
     private void goToParam(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -204,13 +212,14 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         stage.setTitle("Paramètres");
         stage.show();
     }
-    
+
     /**
-    * Method triggered by a button to go back to menu
-    * @param MouseEvent event
-    * @return void
-    * 
-    */
+     * Method triggered by a button to go back to menu
+     *
+     * @param MouseEvent event
+     * @return void
+     *
+     */
     @FXML
     private void goToMenu(MouseEvent event) throws IOException {
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
@@ -219,18 +228,16 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         Main.mainContainer.loadScreen(Main.screenMenuID, Main.screenMenuFile);
         myController.setScreen(Main.screenMenuID);
     }
-    
+
     /**
-    * Method triggered by a key to try to move.
-    * Check what is the key,
-    * Changed the direction depending on the key,
-    * Try to make soft move with Thread,
-    * Update number of moves each times we moved.
-    * After all, call update(2).
-    * @param ke the key we pressed
-    * @throws java.lang.InterruptedException If interrupted
-    * 
-    */
+     * Method triggered by a key to try to move. Check what is the key, Changed
+     * the direction depending on the key, Try to make soft move with Thread,
+     * Update number of moves each times we moved. After all, call update(2).
+     *
+     * @param ke the key we pressed
+     * @throws java.lang.InterruptedException If interrupted
+     *
+     */
     @FXML
     public void keyPressed(KeyEvent ke
     ) throws InterruptedException {
@@ -386,22 +393,24 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
 
         listThread.clear();
     }
-    
+
     /**
-    * Method to update the view and to put new case on the Plateau p.
-    * If first time (n = 1), we check if the player wanted to load a saved game.
-    * If we want to load, we just update the Plateau according to the saved Plateau..
-    * If he didn't want to load a new game, we just start a new Plateau, according to the model Plateau.
-    * If second time or mort (n different of 1).
-    * We first delete all the element of the Plateau,
-    * we add on the Plateau all the new elements (the moved tiles and the new tiles) according to the model Plateau.
-    * Update of the score and the style sheet if changed.
-    * Test victory or Game Over.
-    * @param n the param to control if we update the Plateau for the first time, or during the game
-    * @throws java.lang.InterruptedException if inerrupted
-    * @throws java.io.IOException if Io
-    * 
-    */
+     * Method to update the view and to put new case on the Plateau p. If first
+     * time (n = 1), we check if the player wanted to load a saved game. If we
+     * want to load, we just update the Plateau according to the saved Plateau..
+     * If he didn't want to load a new game, we just start a new Plateau,
+     * according to the model Plateau. If second time or mort (n different of
+     * 1). We first delete all the element of the Plateau, we add on the Plateau
+     * all the new elements (the moved tiles and the new tiles) according to the
+     * model Plateau. Update of the score and the style sheet if changed. Test
+     * victory or Game Over.
+     *
+     * @param n the param to control if we update the Plateau for the first
+     * time, or during the game
+     * @throws java.lang.InterruptedException if inerrupted
+     * @throws java.io.IOException if Io
+     *
+     */
     public void update(int n) throws InterruptedException, IOException {
         if (n == 1) { //LA PREMIERE FOIS QU'ON LANCE LE JEU
             if (Main.wantToLoad) { //SI LANCEMENT D'UNE PARTIE SAUVEGARDÉE
@@ -465,6 +474,9 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             }
 
             //Mise a jour du score :
+            int newBestScore = Math.max(Main.joueur.getMeilleurScore(), p.calculScore());
+            Main.joueur.setMeilleurScore(newBestScore);
+
             score.setText(Integer.toString(p.calculScore()));
             Main.joueur.setJeuEnCours(true);
             VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
@@ -482,18 +494,17 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
         }
         Main.wantToLoad = false;
     }
-    
+
     /**
-    * Method which initialize the component.
-    * If we charge a saved game, we will update the Plateau before anything else,
-    * After, call update(1),
-    * Set the pseudo in the menu bar,
-    * Add style sheet in the background.
-    * @param url the current url 
-    * @param rb the ResourceBundle
-    * @see #update(int) 
-    * 
-    */
+     * Method which initialize the component. If we charge a saved game, we will
+     * update the Plateau before anything else, After, call update(1), Set the
+     * pseudo in the menu bar, Add style sheet in the background.
+     *
+     * @param url the current url
+     * @param rb the ResourceBundle
+     * @see #update(int)
+     *
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {

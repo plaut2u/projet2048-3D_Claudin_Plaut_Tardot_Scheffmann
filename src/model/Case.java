@@ -76,8 +76,8 @@ public class Case implements Parametres, java.io.Serializable {
     /**
      * Vérifie si une case est égale à un objet passé en paramètre.
      * 
-     * @param obj
-     * @return 
+     * @param obj the Object
+     * @return boolean 
      */
     @Override
     public boolean equals(Object obj) {

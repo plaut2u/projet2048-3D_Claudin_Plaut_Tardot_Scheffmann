@@ -29,11 +29,23 @@
                     <children>
                         <VBox prefHeight="303.0" prefWidth="510.0">
                             <children>
-                                <Label prefHeight="39.0" prefWidth="163.0" styleClass="text" text="Se connecter" textFill="#ffae00">
-                                    <font>
-                                        <Font name="System Bold" size="27.0" />
-                                    </font>
-                                </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                                      <Label prefHeight="39.0" prefWidth="163.0" styleClass="text" text="Se connecter" textFill="#ffae00">
+                                          <font>
+                                              <Font name="System Bold" size="27.0" />
+                                          </font>
+                                      </Label>
+                              <Label fx:id="LogInError" prefHeight="25.0" prefWidth="335.0" text="Erreur" textAlignment="CENTER" textFill="RED" visible="false">
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="8.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                     <children>
                                         <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="754.0">
@@ -72,11 +84,23 @@
                                         </HBox>
                                     </children>
                                 </VBox>
-                                <Label styleClass="text" text="S'inscire" textFill="#ffae00">
-                                    <font>
-                                        <Font name="System Bold" size="27.0" />
-                                    </font>
-                                </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                                      <Label styleClass="text" text="S'inscire" textFill="#ffae00">
+                                          <font>
+                                              <Font name="System Bold" size="27.0" />
+                                          </font>
+                                      </Label>
+                              <Label fx:id="SignInError" prefHeight="25.0" prefWidth="389.0" text="Erreur" textAlignment="CENTER" textFill="RED" visible="false">
+                                 <font>
+                                    <Font name="System Italic" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="8.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">

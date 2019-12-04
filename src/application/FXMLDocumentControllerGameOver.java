@@ -80,7 +80,6 @@ public class FXMLDocumentControllerGameOver   implements Initializable, Parametr
     private void quitGame(MouseEvent event) throws IOException{
         Sound buttonClicked = new Sound("sound\\" + "button.wav");
         buttonClicked.start();
-        System.out.println("quit game");
         System.exit(0);
     }
     

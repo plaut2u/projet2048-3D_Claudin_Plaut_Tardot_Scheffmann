@@ -8,6 +8,10 @@ package application;
 import static application.Main.skinMode;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -122,6 +126,47 @@ public class FXMLDocumentControllerVictory implements Initializable, ParametresA
         if(Main.music){
             Sound victory = new Sound("sound\\" + "victory.wav");
             victory.start();
+        }
+        
+        Main.joueur.setNbvictoires(Main.joueur.getNombreVictoires() + 1);
+        
+        //Ouverture BDD
+        /* Connexion à la base de données */
+        /* Chargement du driver JDBC pour MySQL */
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            /* Gérer les éventuelles erreurs ici. */
+        }
+
+        String host = "mysql-2048user.alwaysdata.net";
+        String port = "3306";
+        String database = "2048user_bdd2048";
+        String utilisateur = "2048user";
+        String motDePasse = "AirForce2048";
+        String url2 = "jdbc:mysql://" + host + ":" + port + "/" + database;
+        Connection connexion = null;
+        try {
+            connexion = DriverManager.getConnection(url2, utilisateur, motDePasse);
+            Statement statement = connexion.createStatement();
+            String requete = "UPDATE Projet2048 "
+                            + "SET NbVictory = '" + Main.joueur.getNombreVictoires() + "' "
+                            + "WHERE Pseudo = '" + Main.joueur.getPseudo() + "'";
+            System.out.println(requete);
+            statement.executeUpdate(requete);
+            
+        } catch (SQLException e) {
+            /* Gérer les éventuelles erreurs ici */
+
+        } finally {
+            if (connexion != null) {
+                try {
+                    /* Fermeture de la connexion */
+                    connexion.close();
+                } catch (SQLException ignore) {
+                    /* Si une erreur survient lors de la fermeture, il suffit de l'ignorer. */
+                }
+            }
         }
     }
 
