@@ -27,64 +27,80 @@
             </Label>
             <VBox alignment="CENTER" prefHeight="107.0" prefWidth="790.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="790.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label styleClass="text" text="Pseudo :" textFill="#ffae00">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
+                        <VBox prefHeight="95.0" prefWidth="436.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="738.0">
+                                 <children>
+                                    <Label styleClass="text" text="Pseudo :" textFill="#ffae00">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="100.0" top="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="pseudoLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="text" text="Killer" textFill="#ffae00">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="764.0">
+                                 <children>
+                                    <Label styleClass="text" text="Nombres de victoires :" textFill="#ffae00">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="100.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="nombreVictoires" alignment="CENTER" contentDisplay="CENTER" styleClass="text" text="17" textFill="#ffae00">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="790.0">
+                                 <children>
+                                    <Label styleClass="text" text="Meilleur score :" textFill="#ffae00">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="100.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="meilleurScore" alignment="CENTER" contentDisplay="CENTER" styleClass="text" text="64" textFill="#ffae00">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Button fx:id="classementButton" mnemonicParsing="false" onMouseClicked="#goToClassement" text="Voir le classement">
                            <HBox.margin>
-                              <Insets left="100.0" top="20.0" />
+                              <Insets left="30.0" top="37.0" />
                            </HBox.margin>
-                        </Label>
-                        <Label fx:id="pseudoLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="text" text="Killer" textFill="#ffae00">
                            <font>
                               <Font size="16.0" />
                            </font>
-                           <HBox.margin>
-                              <Insets left="20.0" top="20.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="790.0">
-                     <children>
-                        <Label styleClass="text" text="Nombres de victoires :" textFill="#ffae00">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="100.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label fx:id="nombreVictoires" alignment="CENTER" contentDisplay="CENTER" styleClass="text" text="17" textFill="#ffae00">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="790.0">
-                     <children>
-                        <Label styleClass="text" text="Meilleur score :" textFill="#ffae00">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="100.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label fx:id="meilleurScore" alignment="CENTER" contentDisplay="CENTER" styleClass="text" text="64" textFill="#ffae00">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin>
-                        </Label>
+                        </Button>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="790.0">

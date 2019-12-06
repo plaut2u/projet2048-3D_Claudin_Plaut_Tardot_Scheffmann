@@ -96,15 +96,11 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
             /* Gérer les éventuelles erreurs ici. */
         }
 
-        String host = "mysql-2048user.alwaysdata.net";
-        String port = "3306";
-        String database = "2048user_bdd2048";
-        String utilisateur = "2048user";
-        String motDePasse = "AirForce2048";
-        String url = "jdbc:mysql://" + host + ":" + port + "/" + database;
+        
+        String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
         Connection connexion = null;
         try {
-            connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+            connexion = DriverManager.getConnection(url, USER, PASSWORD);
             Statement statement = connexion.createStatement();
 
             if (pseudoLogIn.getText().equals("") && !pseudoSignIn.getText().equals("") && !mdpSignIn.getText().equals("")) { //cas d'inscription
@@ -123,6 +119,7 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
                     //inscription réussite
                     if (mdpSignIn.getText().equals(mdpSignInVerif.getText())) {
                         requete = "INSERT INTO Projet2048 VALUES('" + pseudoSignIn.getText() + "','" + mdpSignIn.getText() + "',0,0)";
+                        int result = statement.executeUpdate(requete);
                         Main.joueur = new Joueur(pseudoSignIn.getText(), mdpSignIn.getText());
 
                         success = true;

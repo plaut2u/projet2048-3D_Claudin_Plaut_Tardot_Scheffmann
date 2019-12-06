@@ -5,18 +5,23 @@
  */
 package application;
 
+import static application.Main.skinMode;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Enregistreur;
@@ -199,6 +204,30 @@ public class FXMLDocumentControllerAccount implements Initializable, ParametresA
         Stage stage = (Stage) cancelButtonAccount.getScene().getWindow();
         stage.close();
     }
+    
+    /**
+     * Method triggered by a button to go to classement window
+     *
+     * @param MouseEvent event
+     * @return void
+     *
+     */
+    @FXML
+    private void goToClassement(MouseEvent event) throws IOException {
+        Sound buttonClicked = new Sound("sound\\" + "button.wav");
+        buttonClicked.start();
+        
+        Parent root = FXMLLoader.load(getClass().getResource(Main.screenClassementFile));
+        Scene scene = new Scene(root);
+        boolean add = scene.getStylesheets().add("css/" + skinMode + ".css");
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Classement");
+        stage.getIcons().add(new Image("img/classement.png"));
+        stage.show();
+        
+    }
 
     /**
      * Method triggered by a button to disconnect and go back to Login Menu
@@ -239,27 +268,21 @@ public class FXMLDocumentControllerAccount implements Initializable, ParametresA
 
         //Ouverture BDD
         /* Connexion à la base de données */
- /* Chargement du driver JDBC pour MySQL */
+        /* Chargement du driver JDBC pour MySQL */
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             /* Gérer les éventuelles erreurs ici. */
         }
 
-        String host = "mysql-2048user.alwaysdata.net";
-        String port = "3306";
-        String database = "2048user_bdd2048";
-        String utilisateur = "2048user";
-        String motDePasse = "AirForce2048";
-        String url2 = "jdbc:mysql://" + host + ":" + port + "/" + database;
+        String url2 = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
         Connection connexion = null;
         try {
-            connexion = DriverManager.getConnection(url2, utilisateur, motDePasse);
+            connexion = DriverManager.getConnection(url2, USER, PASSWORD);
             Statement statement = connexion.createStatement();
             String requete = "UPDATE Projet2048 "
                     + "SET BestScore = '" + Main.joueur.getMeilleurScore() + "' "
                     + "WHERE Pseudo = '" + Main.joueur.getPseudo() + "'";
-            System.out.println(requete);
             statement.executeUpdate(requete);
 
         } catch (SQLException e) {

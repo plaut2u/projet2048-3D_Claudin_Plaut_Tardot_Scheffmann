@@ -20,6 +20,13 @@ public class Joueur {
         this.nbVictoires = 0;
         this.jeuEnCours = false;
     }
+    
+    //surcharge du constructeur
+    public Joueur(String name, int best, int nb) {
+        this.pseudo = name;
+        this.meilleurScore = best;
+        this.nbVictoires = nb;
+    }
 
     //GETTERS
     public String getPseudo() {
@@ -62,5 +69,4 @@ public class Joueur {
     public void setJeuEnCours(boolean b) {
         this.jeuEnCours = b;
     }
-
 }

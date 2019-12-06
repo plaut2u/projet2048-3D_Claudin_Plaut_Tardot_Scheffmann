@@ -32,6 +32,8 @@ public class Main extends Application {
     public static String screenParamFile = "ParametersScene.fxml";
     public static String screenAccountID = "account";
     public static String screenAccountFile = "AccountScene.fxml";
+    public static String screenClassementID = "classement";
+    public static String screenClassementFile = "ClassementScene.fxml";
     public static ScreensController mainContainer = new ScreensController();
     public static String cheminImg;
     public static String cheminSound;

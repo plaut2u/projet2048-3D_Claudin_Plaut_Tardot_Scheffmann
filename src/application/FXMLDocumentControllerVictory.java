@@ -139,20 +139,14 @@ public class FXMLDocumentControllerVictory implements Initializable, ParametresA
             /* Gérer les éventuelles erreurs ici. */
         }
 
-        String host = "mysql-2048user.alwaysdata.net";
-        String port = "3306";
-        String database = "2048user_bdd2048";
-        String utilisateur = "2048user";
-        String motDePasse = "AirForce2048";
-        String url2 = "jdbc:mysql://" + host + ":" + port + "/" + database;
+        String url2 = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
         Connection connexion = null;
         try {
-            connexion = DriverManager.getConnection(url2, utilisateur, motDePasse);
+            connexion = DriverManager.getConnection(url2, USER, PASSWORD);
             Statement statement = connexion.createStatement();
             String requete = "UPDATE Projet2048 "
                             + "SET NbVictory = '" + Main.joueur.getNombreVictoires() + "' "
                             + "WHERE Pseudo = '" + Main.joueur.getPseudo() + "'";
-            System.out.println(requete);
             statement.executeUpdate(requete);
             
         } catch (SQLException e) {
