@@ -80,8 +80,6 @@ public class FXMLDocumentControllerClassement implements Initializable, Parametr
         tableClassement.getColumns().add(column2);
         tableClassement.getColumns().add(column3);
         
-        
-        
         //Ouverture BDD
         /* Connexion à la base de données */
         /* Chargement du driver JDBC pour MySQL */
