@@ -330,7 +330,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                                 }
                             }
                         });
-                        Thread.sleep(1);
+                        Thread.sleep(100);
                     }
                     while (list.get(c).getPosy() != list.get(c).getObjectify()) { // si la tuile n'est pas à la place qu'on souhaite attendre en abscisse
                         if (list.get(c).getPosy() < list.get(c).getObjectify()) {
@@ -350,7 +350,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                             }
                         }
                         );
-                        Thread.sleep(1);
+                        Thread.sleep(100);
                     }
 
                     return null; // la méthode call doit obligatoirement retourner un objet. Ici on n'a rien de particulier à retourner. Du coup, on utilise le type Void (avec un V majuscule) : c'est un type spécial en Java auquel on ne peut assigner que la valeur null

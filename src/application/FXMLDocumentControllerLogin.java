@@ -163,7 +163,7 @@ public class FXMLDocumentControllerLogin implements Initializable, ParametresApp
 
                         Main.joueur = new Joueur(pseudoLogIn.getText(), mdpLogIn.getText());
                         Main.joueur.setMeilleurScore(Integer.parseInt(bestScore));
-                        Main.joueur.setNbvictoires(Integer.parseInt(nbVic));
+                        Main.joueur.setNbVictoires(Integer.parseInt(nbVic));
                         
                         success = true;
 

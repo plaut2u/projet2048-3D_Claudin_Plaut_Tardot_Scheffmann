@@ -76,7 +76,6 @@ public class FXMLDocumentControllerClassement implements Initializable, Parametr
         column3.setCellValueFactory(new PropertyValueFactory<>("nbVictoires"));
         column3.setPrefWidth(160);
         
-        
         tableClassement.getColumns().add(column1);
         tableClassement.getColumns().add(column2);
         tableClassement.getColumns().add(column3);
@@ -99,13 +98,13 @@ public class FXMLDocumentControllerClassement implements Initializable, Parametr
             Statement statement = connexion.createStatement();
             
             //RECUPERATION DONNEES
-            String requete = "";
-            requete = "SELECT Pseudo, BestScore, NbVictory FROM Projet2048";
+            String requete = "SELECT Pseudo, BestScore, NbVictory, Password FROM Projet2048";
             ResultSet rs = statement.executeQuery(requete);
             while (rs.next()) {
                 Joueur j = new Joueur(rs.getString("Pseudo"),Integer.valueOf(rs.getString("BestScore")),Integer.valueOf(rs.getString("NbVictory")));
                 tableClassement.getItems().add(j);
             }
+            
 
         } catch (SQLException e) {
             /* Gérer les éventuelles erreurs ici */

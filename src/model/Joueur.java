@@ -22,10 +22,10 @@ public class Joueur {
     }
     
     //surcharge du constructeur
-    public Joueur(String name, int best, int nb) {
+    public Joueur(String name, int x, int y){
         this.pseudo = name;
-        this.meilleurScore = best;
-        this.nbVictoires = nb;
+        this.meilleurScore = x;
+        this.nbVictoires = y;
     }
 
     //GETTERS
@@ -41,7 +41,7 @@ public class Joueur {
         return this.meilleurScore;
     }
 
-    public int getNombreVictoires() {
+    public int getNbVictoires() {
         return this.nbVictoires;
     }
 
@@ -62,7 +62,7 @@ public class Joueur {
         this.meilleurScore = x;
     }
 
-    public void setNbvictoires(int n) {
+    public void setNbVictoires(int n) {
         this.nbVictoires = n;
     }
 

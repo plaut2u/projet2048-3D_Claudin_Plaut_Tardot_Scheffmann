@@ -261,7 +261,7 @@ public class FXMLDocumentControllerAccount implements Initializable, ParametresA
         // TODO
         pseudoLabel.setText(Main.joueur.getPseudo());
         meilleurScore.setText(Integer.toString(Main.joueur.getMeilleurScore()));
-        nombreVictoires.setText(Integer.toString(Main.joueur.getNombreVictoires()));
+        nombreVictoires.setText(Integer.toString(Main.joueur.getNbVictoires()));
         tempPseudo = Main.joueur.getPseudo();
         tempPassword = Main.joueur.getPassword();
         resetCheckBox.setSelected(false);

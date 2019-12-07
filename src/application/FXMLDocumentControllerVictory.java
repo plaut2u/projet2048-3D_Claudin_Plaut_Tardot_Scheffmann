@@ -128,7 +128,7 @@ public class FXMLDocumentControllerVictory implements Initializable, ParametresA
             victory.start();
         }
         
-        Main.joueur.setNbvictoires(Main.joueur.getNombreVictoires() + 1);
+        Main.joueur.setNbVictoires(Main.joueur.getNbVictoires() + 1);
         
         //Ouverture BDD
         /* Connexion à la base de données */
@@ -145,7 +145,7 @@ public class FXMLDocumentControllerVictory implements Initializable, ParametresA
             connexion = DriverManager.getConnection(url2, USER, PASSWORD);
             Statement statement = connexion.createStatement();
             String requete = "UPDATE Projet2048 "
-                            + "SET NbVictory = '" + Main.joueur.getNombreVictoires() + "' "
+                            + "SET NbVictory = '" + Main.joueur.getNbVictoires() + "' "
                             + "WHERE Pseudo = '" + Main.joueur.getPseudo() + "'";
             statement.executeUpdate(requete);
             
