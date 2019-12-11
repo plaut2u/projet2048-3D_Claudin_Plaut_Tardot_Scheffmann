@@ -117,8 +117,10 @@ public class Plateau implements Parametres, java.io.Serializable {
     public int calculScore() {
         int x = 0;
         for (Grille g : this.plateau) {
-            if (g.getValeurMax() > x) {
-                x = g.getValeurMax();
+            for(Case elem : g.getGrille()){
+                if(elem.getValeur() > x){
+                    x = elem.getValeur();
+                }
             }
         }
         return x;

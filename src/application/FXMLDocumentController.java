@@ -482,7 +482,7 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             VBoxBackground.getStylesheets().add("css/" + skinMode + ".css");
 
             //Test victoire ou défaite
-            if (p.calculScore() == OBJECTIF && !hasWon) {
+            if (p.calculScore() >= OBJECTIF && !hasWon) {
                 Main.mainContainer.loadScreen(Main.screenVictoryID, Main.screenVictoryFile);
                 myController.setScreen(Main.screenVictoryID);
                 hasWon = true;
