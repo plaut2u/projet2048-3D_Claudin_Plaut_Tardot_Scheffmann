@@ -89,10 +89,8 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                     int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
                     int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
                     if (list.get(j).getX() == newx && list.get(j).getY() == newy) {
-//                        list.get(j).getPane().relocate(list.get(j).getPosx(), list.get(j).getPosy());
                         list.get(j).getImg().relocate(list.get(j).getPosx(), list.get(j).getPosy());
                     }
-//                    list.get(j).getPane().setVisible(false);
                     list.get(j).getImg().setVisible(false);
                     list.remove(j);
                 }
@@ -112,10 +110,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
                 int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
                 int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
                 list.add(new TuileGraphique(newx, newy, elem.getValeur(), fond));
-//                list.get(i).getPane().relocate(list.get(i).getPosx(), list.get(i).getPosy());
-//                list.get(i).getPane().setVisible(true);
-//                fond.getChildren().add(list.get(i).getPane());
-
                 list.get(i).getImg().relocate(list.get(i).getPosx(), list.get(i).getPosy());
                 list.get(i).getImg().setVisible(true);
                 fond.getChildren().add(list.get(i).getImg());
@@ -298,7 +292,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             if (b2 == true) {
                 b = p.nouvelleCasePlateau();
             }
-            System.out.println(p);
         }
         if (!p.checkMovesPlateau()) {
             p.setBloque(true);
@@ -432,7 +425,6 @@ public class FXMLDocumentController implements Initializable, ParametresApplicat
             } else { //SI LANCEMENT NORMAL
                 for (int i = 0; i < NBGRILLES; i++) {
                     for (Case elem : p.getPlateau()[i].getGrille()) {
-                        System.out.println(p);
                         int newx = (int) (LARGEURTUILE * elem.getX() + i * LARGEURTUILE * NBGRILLES) + DEBUTGRILLEX + (int) (ESPACE * i);
                         int newy = (int) (HAUTEURTUILE * elem.getY()) + DEBUTGRILLEY;
                         list.add(new TuileGraphique(newx, newy, elem.getValeur(), fond));

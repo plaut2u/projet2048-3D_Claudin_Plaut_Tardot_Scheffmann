@@ -95,15 +95,10 @@ public class FXMLDocumentControllerAccount implements Initializable, ParametresA
             /* Gérer les éventuelles erreurs ici. */
         }
 
-        String host = "mysql-2048user.alwaysdata.net";
-        String port = "3306";
-        String database = "2048user_bdd2048";
-        String utilisateur = "2048user";
-        String motDePasse = "AirForce2048";
-        String url = "jdbc:mysql://" + host + ":" + port + "/" + database;
+        String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
         Connection connexion = null;
         try {
-            connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+            connexion = DriverManager.getConnection(url, USER, PASSWORD);
 
             if (newPseudo.getText().equals(confirmNewPseudo.getText()) && !newPseudo.getText().equals("")) { //si le nouveau pseudo voulu est égal a la confirmation du nouveau pseudo et non null
                 Statement statement = connexion.createStatement();
