@@ -53,7 +53,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="764.0">
                                  <children>
-                                    <Label styleClass="text" text="Nombres de victoires :" textFill="#ffae00">
+                                    <Label styleClass="text" text="Nombre de victoires :" textFill="#ffae00">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
