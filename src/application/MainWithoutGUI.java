@@ -1,12 +1,16 @@
-package model;
+package application;
 
 import java.util.Scanner;
+import javafx.application.Application;
+import model.Enregistreur;
+import model.Parametres;
+import model.Plateau;
 /**
  * Fonction principale du 2048-3D (et affichage sans interface graphique).
  * 
  * @author William
  */
-public class Main implements Parametres {
+public abstract class MainWithoutGUI extends Application implements Parametres {
 
     public static void main(String[] args) {
         // INITIALISATION
